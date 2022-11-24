@@ -1,5 +1,25 @@
+body{
+  background-color: #F0F0F0;
+}
+
 .App {
   text-align: center;
+}
+
+.subtitle{
+  border-bottom: 2px #094584 solid;
+  width: 120px;
+  color: #094584;
+}
+
+.imgcardnews{
+  filter: brightness(50%);
+  height:250px;
+  object-fit: cover;
+}
+
+.imgcarousel{
+  filter: brightness(50%);
 }
 
 .App-logo {
