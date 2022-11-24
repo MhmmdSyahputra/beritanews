@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from "react";
 import axios from 'axios'
 import { useState } from "react";
+import parse from 'html-react-parser';
 
 const Detailberita = () => {
   const params = useParams();
@@ -35,7 +36,7 @@ const Detailberita = () => {
               berita && berita.map((data) => (
                 <div className="sumut mt-3 mb-5" key={data._id}>
                   <div className="judul fw-bold fs-4">
-                    {data.judul}
+                    {parse(data.judul)}
                   </div>
 
                   <div className="kategori mb-4 text-muted">
@@ -52,7 +53,7 @@ const Detailberita = () => {
                   </div>
                   
                   <div className="content">
-                  {data.isiBerita}
+                  {parse(data.isiBerita)}
                   </div>
 
 

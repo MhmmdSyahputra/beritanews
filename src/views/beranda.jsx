@@ -79,7 +79,15 @@ const Beranda = () => {
               <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
                 <h5>Selengkapnya {">"} </h5>
               </div>
-              <CardBerita />
+              <div className="wrapper">
+                {
+                  berita && berita.map((databerita) => (
+                    <CardBerita id={databerita._id} gambar={databerita.gambar} judul={databerita.judul} key={databerita._id} />
+                    // <CardBerita data={databerita} key={databerita._id} />
+                    
+                  ))
+                }
+              </div>
             </div>
 
             {/* Berita Otomotif */}
@@ -91,7 +99,15 @@ const Beranda = () => {
               <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
                 <h5>Selengkapnya {">"} </h5>
               </div>
-              <CardBerita />
+              <div className="wrapper">
+                {
+                  berita && berita.map((databerita) => (
+                    <CardBerita id={databerita._id} gambar={databerita.gambar} judul={databerita.judul} key={databerita._id} />
+                    // <CardBerita data={databerita} key={databerita._id} />
+                    
+                  ))
+                }
+              </div>
             </div>
 
           </div>

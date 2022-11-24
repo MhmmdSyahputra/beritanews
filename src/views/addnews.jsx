@@ -2,16 +2,34 @@ import React from 'react'
 import { CKEditor } from 'ckeditor4-react';
 import { useState } from 'react';
 import { TagsInput } from "react-tag-input-component";
+import axios from 'axios';
 
 const Addnews = () => {
     const [judul, setJudul] = useState('')
     const [contentnews, setContentnews] = useState()
-    const [selected, setSelected] = useState(["papaya"]);
+    const [kategori, setKategori] = useState()
+    const [tags, setTags] = useState([]);
 
     const simpan =()=>{
         console.log(judul);
         console.log(contentnews);
-        console.log(selected);
+        console.log(kategori);
+        console.log(tags);
+
+        axios
+        .post('http://localhost:3003/news/',{
+            judul: judul,
+            isiBerita: contentnews,
+            kategori: 'kategori',
+            tags: tags,
+        })
+         .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+          });
+
     }
 
     return (
@@ -29,7 +47,7 @@ const Addnews = () => {
 
                                 <div className="kategori mt-3">
                                     <div className="fs-5 fw-bold">Kategori</div>
-                                    <select name="" id="" className='form-control'>
+                                    <select value={kategori} onChange={(e) => setKategori(e.target.value)} className='form-control'>
                                         <option value="teknologi">Teknologi</option>
                                         <option value="ekonomi">Ekonomi</option>
                                         <option value="hukum">Hukum</option>
@@ -54,8 +72,8 @@ const Addnews = () => {
                                 <div className="tags mt-3">
                                     <div className="fs-5 fw-bold">Tags</div>
                                     <TagsInput
-                                        value={selected}
-                                        onChange={setSelected}
+                                        value={tags}
+                                        onChange={setTags}
                                         name="fruits"
                                         placeHolder="enter fruits"
                                     />
