@@ -9,7 +9,7 @@ import { useState } from "react";
 const Beranda = () => {
 
   const [berita, setBerita] = useState()
-  
+
   useEffect(() => {
     axios.
       get('http://localhost:3003/news/')
@@ -26,7 +26,7 @@ const Beranda = () => {
 
   // const { berita } = this.state
   return (
-    
+
     <>
       <div className="container-fluid mt-4 ">
         <div className="row justify-content-around">
@@ -62,9 +62,9 @@ const Beranda = () => {
               <div className="wrapper">
                 {
                   berita && berita.map((databerita) => (
-                    <CardBerita id={databerita._id} gambar={databerita.gambar} judul={databerita.judul} key={databerita._id} />
+                    <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
                     // <CardBerita data={databerita} key={databerita._id} />
-                    
+
                   ))
                 }
               </div>
@@ -82,9 +82,9 @@ const Beranda = () => {
               <div className="wrapper">
                 {
                   berita && berita.map((databerita) => (
-                    <CardBerita id={databerita._id} gambar={databerita.gambar} judul={databerita.judul} key={databerita._id} />
+                    <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
                     // <CardBerita data={databerita} key={databerita._id} />
-                    
+
                   ))
                 }
               </div>
@@ -102,9 +102,9 @@ const Beranda = () => {
               <div className="wrapper">
                 {
                   berita && berita.map((databerita) => (
-                    <CardBerita id={databerita._id} gambar={databerita.gambar} judul={databerita.judul} key={databerita._id} />
+                    <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
                     // <CardBerita data={databerita} key={databerita._id} />
-                    
+
                   ))
                 }
               </div>

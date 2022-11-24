@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
 
-const CardBerita = ({id, judul}) => {
+const CardBerita = ({id, judul,gambar}) => {
 
   let navigate = useNavigate();
   const jalan = (id) => {
@@ -11,10 +12,12 @@ const CardBerita = ({id, judul}) => {
     <>
         <div onClick={() => jalan(id)} className="col-md-4">
           <div className="card text-light">
+            {/* {img.map((res)=>(console.log(res)))} */}
+            
             <img
-              src="https://cdn.discordapp.com/attachments/999546779882233869/1038846087244566568/image.png"
+              src={gambar}
               alt=""
-              width="250"
+              width="265"
               className="img-fluid imgcardnews"
             />
             <div className="card-img-overlay d-flex align-items-end">

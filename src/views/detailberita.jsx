@@ -17,6 +17,7 @@ const Detailberita = () => {
       .then((res) => {
         const news = res.data;
         // console.log(res.data);
+        
         setBerita(news);
       })
   }, [])
@@ -36,6 +37,22 @@ const Detailberita = () => {
               berita && berita.map((data) => (
                 <div className="sumut mt-3 mb-5" key={data._id}>
                   <div className="judul fw-bold fs-4">
+                    {
+                      console.log(data.isiBerita.indexOf(`src="`)+5)
+                    }
+                    {
+                      // console.log(data.isiBerita.indexOf(`src="`)+5)
+                      console.log(data.isiBerita.indexOf(`px" />`))
+                      // const a = b.indexOf("a")
+                      // if (a != -1){
+              
+                      //   console.log(a)
+                      // }
+                    }
+                    
+                    {
+                      console.log(data.isiBerita.slice(data.isiBerita.indexOf(`src="`)+5,data.isiBerita.indexOf(`style="`)))
+                    }
                     {parse(data.judul)}
                   </div>
 
@@ -43,14 +60,7 @@ const Detailberita = () => {
                     {data.kategori} | {data.tglCreate.slice(0,10)} | {data.tglCreate.slice(12,19)}
                   </div>
 
-                  <div className="gambar mb-3 d-flex justify-content-center">
-                    <img
-                      src="https://cdn.discordapp.com/attachments/999546779882233869/1038846087244566568/image.png"
-                      alt=""
-                      width="70%"
-                      className="img-fluid"
-                    />
-                  </div>
+                  
                   
                   <div className="content">
                   {parse(data.isiBerita)}

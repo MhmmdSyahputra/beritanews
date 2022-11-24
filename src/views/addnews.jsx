@@ -6,25 +6,26 @@ import axios from 'axios';
 
 const Addnews = () => {
     const [judul, setJudul] = useState('')
-    const [contentnews, setContentnews] = useState()
+    const [contentnews, setContentnews] = useState('')
     const [kategori, setKategori] = useState()
     const [tags, setTags] = useState([]);
-
+    
     const simpan =()=>{
-        console.log(judul);
-        console.log(contentnews);
-        console.log(kategori);
-        console.log(tags);
-
+        const img = contentnews.slice(contentnews.indexOf(`src="`)+5,contentnews.indexOf(`style="`)-2)
         axios
         .post('http://localhost:3003/news/',{
             judul: judul,
+            kategori: kategori,
+            gambarberita: img,
             isiBerita: contentnews,
-            kategori: 'kategori',
-            tags: tags,
+            tag: tags,
         })
          .then(function (response) {
-            console.log(response);
+            setJudul('')
+            setContentnews('')
+            setKategori('')
+            setTags([])
+
         })
         .catch(function (error) {
             console.log(error);
@@ -48,9 +49,12 @@ const Addnews = () => {
                                 <div className="kategori mt-3">
                                     <div className="fs-5 fw-bold">Kategori</div>
                                     <select value={kategori} onChange={(e) => setKategori(e.target.value)} className='form-control'>
-                                        <option value="teknologi">Teknologi</option>
-                                        <option value="ekonomi">Ekonomi</option>
-                                        <option value="hukum">Hukum</option>
+                                        <option>Teknologi</option>
+                                        <option>Ekonomi</option>
+                                        <option>Hukum</option>
+                                        <option>Bola</option>
+                                        <option>Kesehatan</option>
+                                        <option>Politik</option>
                                     </select>
                                 </div>
 
