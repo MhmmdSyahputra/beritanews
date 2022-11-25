@@ -1,11 +1,11 @@
 import React from "react";
 import CardBerita from "../components/cardBerita";
-import Carousel from "../components/carousel";
+import ComponentCarousel from "../components/carousel";
 import axios from 'axios'
 import { useEffect } from "react";
 import { useState } from "react";
 import ColumnRight from "../components/columnRight";
-
+import Carousel from "react-bootstrap/Carousel";
 
 const Beranda = () => {
 
@@ -35,18 +35,12 @@ const Beranda = () => {
             {/* Carousel */}
             <div className="carou mb-5">
               <div
-                className="subtitle mb-4"
-                style={{
-                  borderBottom: "2px #094584 solid",
-                  width: "100px",
-                  color: "#094584",
-                }}
-              >
+                className="subtitle mb-4">
                 <h2 className="fw-bold">News</h2>
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-md-10 ">
-                  <Carousel />
+                  <ComponentCarousel />
                 </div>
               </div>
             </div>
@@ -55,14 +49,16 @@ const Beranda = () => {
             <div className="sumut mt-3 mb-5">
               <div
                 className="subtitle mb-4">
-                <h2 className="fw-bold">Sumut</h2>
+                <h2 className="fw-bold">Teknologi</h2>
               </div>
               <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
                 <h5>Selengkapnya {">"} </h5>
               </div>
               <div className="wrapper">
                 {
-                  berita && berita.map((databerita) => (
+                  berita && berita
+                  .filter(databerita=>databerita.kategori == "Teknologi") 
+                  .map((databerita) => (
                     <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
                     // <CardBerita data={databerita} key={databerita._id} />
 
@@ -74,7 +70,7 @@ const Beranda = () => {
             {/* Berita Ekonomi */}
             <div className="ekonomi mt-3 mb-5">
               <div
-                className="subtitle mb-4" style={{ width: '150px' }}>
+                className="subtitle mb-4">
                 <h2 className="fw-bold">Ekonomi</h2>
               </div>
               <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
@@ -82,7 +78,9 @@ const Beranda = () => {
               </div>
               <div className="wrapper">
                 {
-                  berita && berita.map((databerita) => (
+                  berita && berita
+                  .filter(databerita=>databerita.kategori == "Ekonomi") 
+                  .map((databerita) => (
                     <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
                     // <CardBerita data={databerita} key={databerita._id} />
 
@@ -94,7 +92,7 @@ const Beranda = () => {
             {/* Berita Otomotif */}
             <div className="otomotif mt-3 mb-5">
               <div
-                className="subtitle mb-4" style={{ width: '150px' }}>
+                className="subtitle mb-4">
                 <h2 className="fw-bold">Otomotif</h2>
               </div>
               <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
@@ -102,7 +100,9 @@ const Beranda = () => {
               </div>
               <div className="wrapper">
                 {
-                  berita && berita.map((databerita) => (
+                  berita && berita
+                  .filter(databerita=>databerita.kategori == "Otomotif") 
+                  .map((databerita) => (
                     <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
                     // <CardBerita data={databerita} key={databerita._id} />
 

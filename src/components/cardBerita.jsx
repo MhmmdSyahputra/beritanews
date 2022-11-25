@@ -11,17 +11,17 @@ const CardBerita = ({id, judul,gambar}) => {
   return (
     <>
         <div onClick={() => jalan(id)} className="col-md-4">
-          <div className="card text-light">
+          <div className="card text-light border-0">
             {/* {img.map((res)=>(console.log(res)))} */}
             
             <img
               src={gambar}
               alt=""
-              width="265"
+              width="250"
               className="img-fluid imgcardnews"
             />
             <div className="card-img-overlay d-flex align-items-end">
-              <div className="text-light fw-bold card-title">
+              <div className="d-flex align-items-end text-light fw-bold card-title">
                 {judul}
               </div>
             </div>

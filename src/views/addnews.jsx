@@ -38,7 +38,7 @@ const Addnews = () => {
             <div className="container-fluid mt-4 ">
                 <div className="row justify-content-around">
                     <div className="col-8 p-5" style={{ backgroundColor: "#FFFFFF" }}>
-                        <h2 className='subtitle' style={{ width: '45%' }}>+ Tambah Berita Baru</h2>
+                        <h2 className=''>+ Tambah Berita Baru</h2>
                         <div className="mt-5 form-news">
                            
                                 <div className="judul mt-3">
@@ -55,6 +55,7 @@ const Addnews = () => {
                                         <option>Bola</option>
                                         <option>Kesehatan</option>
                                         <option>Politik</option>
+                                        <option>Otomotif</option>
                                     </select>
                                 </div>
 

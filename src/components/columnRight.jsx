@@ -31,7 +31,7 @@ const ColumnRight = () => {
                         <CardBerita2 id={databerita._id} gambar={databerita.gambarberita} size='0.78em' judul={databerita.judul} key={databerita._id} />
                         // <CardBerita data={databerita} key={databerita._id} />
 
-                    ))
+                    )).slice(0,6)
                 }
             </div>
 
