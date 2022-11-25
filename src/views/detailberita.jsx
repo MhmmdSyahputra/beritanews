@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import axios from 'axios'
 import { useState } from "react";
 import parse from 'html-react-parser';
+import ColumnRight from '../components/columnRight';
+
 
 const Detailberita = () => {
   const params = useParams();
@@ -16,11 +18,18 @@ const Detailberita = () => {
       get(`http://localhost:3003/news/${id}`)
       .then((res) => {
         const news = res.data;
-        // console.log(res.data);
-        
         setBerita(news);
       })
   }, [])
+
+  useEffect(() => {
+    axios.
+      get(`http://localhost:3003/news/${id}`)
+      .then((res) => {
+        const news = res.data;
+        setBerita(news);
+      })
+  }, [id])
 
 
   return (
@@ -74,12 +83,10 @@ const Detailberita = () => {
           </div>
 
           {/* Column Right */}
-          <div className="col-3" style={{ backgroundColor: "#FFFFFF" }}>
-            <div
-              className="subtitle ms-3 mb-4">
-              <h5 className="fw-bold">Populer</h5>
-            </div>
+          <div className="col-3 py-4" style={{ backgroundColor: "#FFFFFF" }}>
+            <ColumnRight/>
           </div>
+
         </div>
       </div>
     </>

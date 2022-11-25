@@ -4,6 +4,7 @@ import Carousel from "../components/carousel";
 import axios from 'axios'
 import { useEffect } from "react";
 import { useState } from "react";
+import ColumnRight from "../components/columnRight";
 
 
 const Beranda = () => {
@@ -113,11 +114,8 @@ const Beranda = () => {
           </div>
 
           {/* Column Right */}
-          <div className="col-3" style={{ backgroundColor: "#FFFFFF" }}>
-            <div
-              className="subtitle ms-3 mb-4">
-              <h5 className="fw-bold">Populer</h5>
-            </div>
+          <div className="col-3 py-4 " style={{ backgroundColor: "#FFFFFF" }}>
+            <ColumnRight />
           </div>
 
         </div>
