@@ -10,6 +10,7 @@ import Skeleton from "@mui/material/Skeleton";
 const Berita = () => {
   const [berita, setBerita] = useState()
   const [kategori, setKategori] = useState('ALL')
+  const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -17,9 +18,17 @@ const Berita = () => {
       get(`http://localhost:3003/news/`)
       .then((res) => {
         const news = res.data;
-        // console.log(res.data);
         setBerita(news);
         setLoading(false)
+      })
+  }, [])
+
+  useEffect(() => {
+    axios.
+      get(`http://localhost:3003/category/`)
+      .then((res) => {
+        const categories = res.data;
+        setKategories(categories);
       })
   }, [])
 
@@ -28,7 +37,6 @@ const Berita = () => {
       get(`http://localhost:3003/news/cate/${kategori}`)
       .then((res) => {
         const news = res.data;
-        // console.log(res.data);
         setBerita(news);
         setLoading(false)
       })
@@ -66,20 +74,11 @@ const Berita = () => {
               </div> */}
               
               <div className="">
-                <div className={"btn text-light m-2 fw-bold btn-primary" + (kategori === 'Teknologi' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Teknologi')}>Teknologi</div>
-
-                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Ekonomi' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Ekonomi')}>Ekonomi</div>
-
-                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Hukum' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Hukum')}>Hukum</div>
-
-                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Bola' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Bola')}>Bola</div>
-
-                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Kesehatan' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Kesehatan')}>Kesehatan</div>
-
-                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Politik' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Politik')}>Politik</div>
-
-                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Otomotif' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Otomotif')}>Otomotif</div>
-
+                {
+                  kategories && kategories.map((resCategories)=>(
+                    <div className={"btn text-light m-2 fw-bold btn-primary " + (kategori === resCategories.nameKategory ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori(resCategories.nameKategory)}>{resCategories.nameKategory}</div>
+                  ))
+                }
               </div>
 
             </div>

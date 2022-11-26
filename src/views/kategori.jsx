@@ -1,8 +1,20 @@
 import React from 'react'
 import ColumnRight from "../components/columnRight";
 import KategoriComp from '../components/kategori';
+import axios from 'axios'
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Kategori = () => {
+  const [kategories, setKategories] = useState()
+  useEffect(() => {
+    axios.
+      get(`http://localhost:3003/category/`)
+      .then((res) => {
+        const categories = res.data;
+        setKategories(categories);
+      })
+  }, [])
   return (
     <>
       <div className="container-fluid mt-4 ">
@@ -14,7 +26,11 @@ const Kategori = () => {
               <h2 className="fw-bold">Kategories</h2>
             </div>
             <div className="row">
-              <KategoriComp addclass='imgcardnews' />
+              {
+                kategories && kategories.map((resCate)=>(
+                  <KategoriComp addclass='imgcardnews' namacate={resCate.nameKategory} gambarcate={resCate.gambarKategory} />
+                ))
+              }
             </div>
           </div>
 

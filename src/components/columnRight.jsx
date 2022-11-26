@@ -5,9 +5,18 @@ import axios from 'axios'
 import { useEffect } from "react";
 import KategoriComp from '../components/kategori';
 
-
 const ColumnRight = () => {
     const [berita, setBerita] = useState()
+    const [kategories, setKategories] = useState()
+
+      useEffect(() => {
+        axios.
+          get(`http://localhost:3003/category/`)
+          .then((res) => {
+            const categories = res.data;
+            setKategories(categories);
+          })
+      }, [])
 
     useEffect(() => {
         axios.
@@ -42,9 +51,13 @@ const ColumnRight = () => {
                 className="subtitle ms-3 mb-4">
                 <h5 className="fw-bold">Kategories</h5>
             </div>
-                    <div className="row">
-                        <KategoriComp fontsize='fs-6' col='col-md-6'/>
-                    </div>
+            <div className="row">
+              {
+                kategories && kategories.map((resCate)=>(
+                  <KategoriComp fontsize='fs-6' col='col-md-6' addclass='imgcardnews' namacate={resCate.nameKategory} gambarcate={resCate.gambarKategory} />
+                ))
+              }
+            </div>
         </>
     )
 }
