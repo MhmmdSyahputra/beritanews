@@ -1,7 +1,6 @@
 import React from 'react'
 import CardBerita2 from "../components/cardBerita2";
 import axios from 'axios'
-import Carousel from "../components/carousel";
 import { useEffect } from "react";
 import { useState } from "react";
 import ColumnRight from "../components/columnRight";
@@ -23,7 +22,7 @@ const Berita = () => {
         setLoading(false)
       })
   }, [])
-  
+
   useEffect(() => {
     axios.
       get(`http://localhost:3003/news/cate/${kategori}`)
@@ -50,7 +49,7 @@ const Berita = () => {
                 <h2 className="fw-bold">{kategori} </h2>
               </div>
 
-              <div className="col-md-5 mb-3 ms-auto" style={{ color: '#3E3E3E' }}>
+              {/* <div className="col-md-5 mb-3 ms-auto" style={{ color: '#3E3E3E' }}>
                 <h5>
 
                   <select value={kategori} onChange={(e) => setKategori(e.target.value)} className='form-control'>
@@ -64,6 +63,23 @@ const Berita = () => {
                     <option value='Otomotif'>Otomotif</option>
                   </select>
                 </h5>
+              </div> */}
+              
+              <div className="">
+                <div className={"btn text-light m-2 fw-bold btn-primary" + (kategori === 'Teknologi' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Teknologi')}>Teknologi</div>
+
+                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Ekonomi' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Ekonomi')}>Ekonomi</div>
+
+                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Hukum' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Hukum')}>Hukum</div>
+
+                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Bola' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Bola')}>Bola</div>
+
+                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Kesehatan' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Kesehatan')}>Kesehatan</div>
+
+                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Politik' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Politik')}>Politik</div>
+
+                <div className={"btn text-light m-2 fw-bold " + (kategori === 'Otomotif' ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori('Otomotif')}>Otomotif</div>
+
               </div>
 
             </div>
