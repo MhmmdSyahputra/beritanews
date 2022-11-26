@@ -4,7 +4,6 @@ import parse from 'html-react-parser';
 
 const CardBerita2 = ({ id, judul, gambar,content,size }) => {
     let navigate = useNavigate();
-console.log(size);
     const jalan = (id) => {
         navigate("/berita/" + id);
     }
@@ -13,7 +12,7 @@ console.log(size);
         <>
         <div className="row mb-3" onClick={() => jalan(id)}>
 
-            <div className="col-md-6 ">
+            <div className="col-md-5 ">
                 <img
                     src={gambar}
                     alt=""
@@ -22,7 +21,7 @@ console.log(size);
                 />
             </div>
 
-            <div className="col-md-6 ps-1">
+            <div className="col-md-7 ps-1">
                 <div className="text-dark fw-bold" style={{fontSize:size}}>
                     {judul}
                 </div>

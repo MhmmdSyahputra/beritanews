@@ -20,7 +20,7 @@ const ComponentCarousel = () => {
 
     <Carousel fade>
       {berita && berita.map((data)=>(
-      <Carousel.Item>
+      <Carousel.Item key={data._id}>
         <img
           className="imgcarousel d-block w-100"
           src={data.gambarberita}
