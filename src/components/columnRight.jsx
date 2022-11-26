@@ -1,9 +1,10 @@
 import React from 'react'
-import CardBerita from "../components/cardBerita";
 import CardBerita2 from "../components/cardBerita2";
 import { useState } from 'react';
 import axios from 'axios'
 import { useEffect } from "react";
+import KategoriComp from '../components/kategori';
+
 
 const ColumnRight = () => {
     const [berita, setBerita] = useState()
@@ -31,7 +32,7 @@ const ColumnRight = () => {
                         <CardBerita2 id={databerita._id} gambar={databerita.gambarberita} size='0.78em' judul={databerita.judul} key={databerita._id} />
                         // <CardBerita data={databerita} key={databerita._id} />
 
-                    )).slice(0,6)
+                    )).slice(0, 6)
                 }
             </div>
 
@@ -41,6 +42,9 @@ const ColumnRight = () => {
                 className="subtitle ms-3 mb-4">
                 <h5 className="fw-bold">Kategories</h5>
             </div>
+                    <div className="row">
+                        <KategoriComp fontsize='fs-6' col='col-md-6'/>
+                    </div>
         </>
     )
 }

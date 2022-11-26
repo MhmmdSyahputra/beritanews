@@ -5,7 +5,6 @@ import axios from 'axios'
 import { useEffect } from "react";
 import { useState } from "react";
 import ColumnRight from "../components/columnRight";
-import Carousel from "react-bootstrap/Carousel";
 
 const Beranda = () => {
 

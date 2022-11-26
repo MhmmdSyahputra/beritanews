@@ -46,22 +46,6 @@ const Detailberita = () => {
               berita && berita.map((data) => (
                 <div className="sumut mt-3 mb-5" key={data._id}>
                   <div className="judul fw-bold fs-4">
-                    {
-                      console.log(data.isiBerita.indexOf(`src="`)+5)
-                    }
-                    {
-                      // console.log(data.isiBerita.indexOf(`src="`)+5)
-                      console.log(data.isiBerita.indexOf(`px" />`))
-                      // const a = b.indexOf("a")
-                      // if (a != -1){
-              
-                      //   console.log(a)
-                      // }
-                    }
-                    
-                    {
-                      console.log(data.isiBerita.slice(data.isiBerita.indexOf(`src="`)+5,data.isiBerita.indexOf(`style="`)))
-                    }
                     {parse(data.judul)}
                   </div>
 

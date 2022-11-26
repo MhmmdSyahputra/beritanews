@@ -15,6 +15,17 @@ const Berita = () => {
 
   useEffect(() => {
     axios.
+      get(`http://localhost:3003/news/`)
+      .then((res) => {
+        const news = res.data;
+        // console.log(res.data);
+        setBerita(news);
+        setLoading(false)
+      })
+  }, [])
+  
+  useEffect(() => {
+    axios.
       get(`http://localhost:3003/news/cate/${kategori}`)
       .then((res) => {
         const news = res.data;
@@ -24,16 +35,7 @@ const Berita = () => {
       })
   }, [kategori])
 
-  useEffect(() => {
-    axios.
-      get(`http://localhost:3003/news/`)
-      .then((res) => {
-        const news = res.data;
-        // console.log(res.data);
-        setBerita(news);
-        setLoading(false)
-      })
-  }, [])
+  
   return (
     <>
       <div className="container-fluid mt-4 ">
@@ -110,8 +112,8 @@ const Berita = () => {
                 </div>
 
               )
-                : (
-                  
+                : 
+                  (
                   <div className="row">
                     {
                       berita && berita.map((databerita) => (
