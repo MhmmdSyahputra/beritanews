@@ -24,7 +24,7 @@ const ComponentCarousel = () => {
     <Carousel fade>
       {
         loading ? (
-          <Skeleton variant="rectangular" width='100%' height={250} />
+          <Skeleton variant="rectangular" width='100%' height={400} />
         ) : (
           berita && berita.map((data) => (
             <Carousel.Item key={data._id}>
@@ -38,6 +38,7 @@ const ComponentCarousel = () => {
               </Carousel.Caption>
             </Carousel.Item>
           )).slice(2, 6)
+          
         )
       }
     </Carousel>
