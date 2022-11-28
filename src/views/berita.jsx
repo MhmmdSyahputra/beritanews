@@ -42,7 +42,7 @@ const Berita = () => {
       })
   }, [kategori])
 
-  
+
   return (
     <>
       <div className="container-fluid mt-4 ">
@@ -57,26 +57,10 @@ const Berita = () => {
                 <h2 className="fw-bold">{kategori} </h2>
               </div>
 
-              {/* <div className="col-md-5 mb-3 ms-auto" style={{ color: '#3E3E3E' }}>
-                <h5>
-
-                  <select value={kategori} onChange={(e) => setKategori(e.target.value)} className='form-control'>
-                    <option value="" selected="selected" hidden="hidden">---Kategori</option>
-                    <option value='Teknologi'>Teknologi</option>
-                    <option value='Ekonomi'>Ekonomi</option>
-                    <option value='Hukum'>Hukum</option>
-                    <option value='Bola'>Bola</option>
-                    <option value='Kesehatan'>Kesehatan</option>
-                    <option value='Politik'>Politik</option>
-                    <option value='Otomotif'>Otomotif</option>
-                  </select>
-                </h5>
-              </div> */}
-              
               <div className="">
                 {
-                  kategories && kategories.map((resCategories)=>(
-                    <div className={"btn text-light m-2 fw-bold btn-primary " + (kategori === resCategories.nameKategory ? 'bg-primary' : '')} style={{backgroundColor:'#094584'}} onClick={(e) => setKategori(resCategories.nameKategory)}>{resCategories.nameKategory}</div>
+                  kategories && kategories.map((resCategories) => (
+                    <div className={"btn text-light m-2 fw-bold btn-primary " + (kategori === resCategories.nameKategory ? 'bg-primary' : '')} style={{ backgroundColor: '#094584' }} onClick={(e) => setKategori(resCategories.nameKategory)}>{resCategories.nameKategory}</div>
                   ))
                 }
               </div>
@@ -84,51 +68,51 @@ const Berita = () => {
             </div>
             {
               loading ? (
-                
+                // ------THIS SKELETON AT LOADING
                 <div className="row m-3">
-                  
-                    <div className="col-md-5 mb-3">
-                      <Skeleton variant="rectangular" width='100%' height={250} />
-                    </div>
-                    <div className="col-md-7">
-                      <Skeleton variant="rectangular" width='100%' height={80} />
-                      <br />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                    </div>
-                    
-                  
-                    <div className="col-md-5 mb-3">
-                      <Skeleton variant="rectangular" width='100%' height={250} />
-                    </div>
-                    <div className="col-md-7">
-                      <Skeleton variant="rectangular" width='100%' height={80} />
-                      <br />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                    </div>
-                  
-                    <div className="col-md-5 mb-3">
-                      <Skeleton variant="rectangular" width='100%' height={250} />
-                    </div>
-                    <div className="col-md-7">
-                      <Skeleton variant="rectangular" width='100%' height={80} />
-                      <br />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                      <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
-                    </div>
+
+                  <div className="col-md-5 mb-3">
+                    <Skeleton variant="rectangular" width='100%' height={250} />
+                  </div>
+                  <div className="col-md-7">
+                    <Skeleton variant="rectangular" width='100%' height={80} />
+                    <br />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                  </div>
+
+
+                  <div className="col-md-5 mb-3">
+                    <Skeleton variant="rectangular" width='100%' height={250} />
+                  </div>
+                  <div className="col-md-7">
+                    <Skeleton variant="rectangular" width='100%' height={80} />
+                    <br />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                  </div>
+
+                  <div className="col-md-5 mb-3">
+                    <Skeleton variant="rectangular" width='100%' height={250} />
+                  </div>
+                  <div className="col-md-7">
+                    <Skeleton variant="rectangular" width='100%' height={80} />
+                    <br />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                    <Skeleton variant="rectangular" width='100%' height={30} className='mb-2' />
+                  </div>
 
                 </div>
 
               )
-                : 
-                  (
+                :
+                (
                   <div className="row">
                     {
                       berita && berita.map((databerita) => (

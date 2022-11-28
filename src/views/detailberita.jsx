@@ -50,13 +50,11 @@ const Detailberita = () => {
                   </div>
 
                   <div className="kategori mb-4 text-muted">
-                    {data.kategori} | {data.tglCreate.slice(0,10)} | {data.tglCreate.slice(12,19)}
+                    {data.kategori} | {data.tglCreate.slice(0, 10)} | {data.tglCreate.slice(12, 19)}
                   </div>
 
-                  
-                  
                   <div className="content">
-                  {parse(data.isiBerita)}
+                    {parse(data.isiBerita)}
                   </div>
 
 
@@ -68,7 +66,7 @@ const Detailberita = () => {
 
           {/* Column Right */}
           <div className="col-3 py-4" style={{ backgroundColor: "#FFFFFF" }}>
-            <ColumnRight/>
+            <ColumnRight />
           </div>
 
         </div>

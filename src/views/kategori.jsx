@@ -4,17 +4,22 @@ import KategoriComp from '../components/kategori';
 import axios from 'axios'
 import { useEffect } from "react";
 import { useState } from "react";
+import Skeleton from "@mui/material/Skeleton";
 
 const Kategori = () => {
   const [kategories, setKategories] = useState()
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     axios.
       get(`http://localhost:3003/category/`)
       .then((res) => {
         const categories = res.data;
         setKategories(categories);
+        setLoading(false);
       })
   }, [])
+
   return (
     <>
       <div className="container-fluid mt-4 ">
@@ -27,9 +32,37 @@ const Kategori = () => {
             </div>
             <div className="row">
               {
-                kategories && kategories.map((resCate)=>(
-                  <KategoriComp addclass='imgcardnews' namacate={resCate.nameKategory} gambarcate={resCate.gambarKategory} />
-                ))
+                loading ? (
+                  // ------THIS SKELETON AT LOADING
+                  <div className="row">
+
+                    <div className="col-md-4">
+                      <Skeleton variant="rectangular" width='100%' height={250} className='mb42' />
+                    </div>
+                    <div className="col-md-4">
+                      <Skeleton variant="rectangular" width='100%' height={250} className='mb-4' />
+                    </div>
+                    <div className="col-md-4">
+                      <Skeleton variant="rectangular" width='100%' height={250} className='mb-4' />
+                    </div>
+                    <div className="col-md-4">
+                      <Skeleton variant="rectangular" width='100%' height={250} className='mb-4' />
+                    </div>
+                    <div className="col-md-4">
+                      <Skeleton variant="rectangular" width='100%' height={250} className='mb-4' />
+                    </div>
+                    <div className="col-md-4">
+                      <Skeleton variant="rectangular" width='100%' height={250} className='mb-4' />
+                    </div>
+
+                  </div>
+                ) : (
+                  kategories && kategories.map((resCate) => (
+                    <KategoriComp addclass='imgcardnews' namacate={resCate.nameKategory} gambarcate={resCate.gambarKategory} />
+                  ))
+
+                )
+
               }
             </div>
           </div>

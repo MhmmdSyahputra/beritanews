@@ -5,26 +5,23 @@ import axios from 'axios'
 import { useEffect } from "react";
 import { useState } from "react";
 import ColumnRight from "../components/columnRight";
+import Skeleton from "@mui/material/Skeleton";
 
 const Beranda = () => {
 
   const [berita, setBerita] = useState()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     axios.
       get('http://localhost:3003/news/')
       .then((res) => {
         const news = res.data;
-        // console.log(res.data);
         setBerita(news);
+        setLoading(false);
       })
   }, [])
 
-  // const news = berita && berita.map((databerita) => (
-  //   <CardBerita data={databerita} key={databerita._id} />
-  // ))
-
-  // const { berita } = this.state
   return (
 
     <>
@@ -55,13 +52,23 @@ const Beranda = () => {
               </div>
               <div className="wrapper">
                 {
-                  berita && berita
-                  .filter(databerita=>databerita.kategori == "Teknologi") 
-                  .map((databerita) => (
-                    <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
-                    // <CardBerita data={databerita} key={databerita._id} />
+                  loading ? (
+                    <div className="row">
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                    </div>
+                  ) : (
+                    berita && berita
+                      .filter(databerita => databerita.kategori == "Teknologi")
+                      .map((databerita) => (
+                        <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
+                        // <CardBerita data={databerita} key={databerita._id} />
 
-                  ))
+                      ))
+
+                  )
+
                 }
               </div>
             </div>
@@ -77,13 +84,20 @@ const Beranda = () => {
               </div>
               <div className="wrapper">
                 {
-                  berita && berita
-                  .filter(databerita=>databerita.kategori == "Ekonomi") 
-                  .map((databerita) => (
-                    <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
-                    // <CardBerita data={databerita} key={databerita._id} />
-
-                  ))
+                  loading ? (
+                    // ------THIS SKELETON AT LOADING
+                    <div className="row">
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                    </div>
+                  ) : (
+                    berita && berita
+                      .filter(databerita => databerita.kategori == "Ekonomi")
+                      .map((databerita) => (
+                        <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
+                      ))
+                  )
                 }
               </div>
             </div>
@@ -99,13 +113,20 @@ const Beranda = () => {
               </div>
               <div className="wrapper">
                 {
-                  berita && berita
-                  .filter(databerita=>databerita.kategori == "Otomotif") 
-                  .map((databerita) => (
-                    <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
-                    // <CardBerita data={databerita} key={databerita._id} />
-
-                  ))
+                  // ------THIS SKELETON AT LOADING
+                  loading ? (
+                    <div className="row">
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                      <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
+                    </div>
+                  ) : (
+                    berita && berita
+                      .filter(databerita => databerita.kategori == "Otomotif")
+                      .map((databerita) => (
+                        <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
+                      ))
+                  )
                 }
               </div>
             </div>
