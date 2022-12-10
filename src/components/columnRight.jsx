@@ -118,10 +118,9 @@ const ColumnRight = () => {
             </div>
 
           ) : (
-            berita && berita.map((databerita) => (
-              <CardBerita2 id={databerita._id} gambar={databerita.gambarberita} size='0.78em' judul={databerita.judul} key={databerita._id} />
+            berita && berita.map((databerita,index) => (
+              <CardBerita2 key={index} data={databerita} size={'0.78em'} />
             )).slice(0, 6)
-
           )
 
         }
@@ -161,8 +160,9 @@ const ColumnRight = () => {
             </div>
 
           ) : (
-            kategories && kategories.map((resCate) => (
-              <KategoriComp fontsize='fs-6' col='col-md-6' addclass='imgcardnews' heightimg='130px' namacate={resCate.nameKategory} gambarcate={resCate.gambarKategory} />
+
+            kategories && kategories.map((resCate,index) => (
+              <KategoriComp fontsize='fs-6' col='col-md-6' heightimg='130px' addclass='imgcardnews' key={index} data={resCate} />
             ))
             
           )

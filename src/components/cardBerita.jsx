@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 
-const CardBerita = ({id, judul,gambar}) => {
+const CardBerita = ({data}) => {
 
   let navigate = useNavigate();
   const jalan = (id) => {
@@ -9,19 +9,19 @@ const CardBerita = ({id, judul,gambar}) => {
   }
   return (
     <>
-        <div onClick={() => jalan(id)} className="col-md-4">
+        <div onClick={() => jalan(data._id)} className="col-md-4">
           <div className="card text-light border-0">
             {/* {img.map((res)=>(console.log(res)))} */}
             
             <img
-              src={gambar}
+              src={data.gambarberita}
               alt=""
               width="250"
               className="img-fluid imgcardnews"
             />
             <div className="card-img-overlay d-flex align-items-end">
               <div className="d-flex align-items-end text-light fw-bold card-title">
-                {judul}
+                {data.judul}
               </div>
             </div>
           </div>

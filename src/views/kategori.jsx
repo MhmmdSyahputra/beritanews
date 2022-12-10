@@ -57,8 +57,8 @@ const Kategori = () => {
 
                   </div>
                 ) : (
-                  kategories && kategories.map((resCate) => (
-                    <KategoriComp addclass='imgcardnews' namacate={resCate.nameKategory} gambarcate={resCate.gambarKategory} />
+                  kategories && kategories.map((resCate,index) => (
+                    <KategoriComp addclass='imgcardnews' key={index} data={resCate} />
                   ))
 
                 )
@@ -68,7 +68,7 @@ const Kategori = () => {
           </div>
 
           {/* Column Right */}
-          <div className="col-3 py-4 p-1 pe-0" style={{ backgroundColor: "#FFFFFF" }}>
+          <div className="col-3 py-4" style={{ backgroundColor: "#FFFFFF" }}>
             <ColumnRight />
           </div>
 

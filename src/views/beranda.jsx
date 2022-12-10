@@ -27,9 +27,8 @@ const Beranda = () => {
     <>
       <div className="container-fluid mt-4 ">
         <div className="row justify-content-around">
-          <div className="col-8 p-5" style={{ backgroundColor: "#FFFFFF" }}>
+          <div className="col-8 p-3" style={{ backgroundColor: "#FFFFFF" }}>
             {/* Carousel */}
-            <div className="carou mb-5">
               <div
                 className="subtitle mb-4">
                 <h2 className="fw-bold">News</h2>
@@ -39,7 +38,6 @@ const Beranda = () => {
                   <ComponentCarousel />
                 </div>
               </div>
-            </div>
 
             {/* Berita Sumut */}
             <div className="sumut mt-3 mb-5">
@@ -50,7 +48,7 @@ const Beranda = () => {
               <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
                 <h5>Selengkapnya {">"} </h5>
               </div>
-              <div className="wrapper">
+              <div className="wrapper px-4">
                 {
                   loading ? (
                     <div className="row">
@@ -61,8 +59,8 @@ const Beranda = () => {
                   ) : (
                     berita && berita
                       .filter(databerita => databerita.kategori == "Teknologi")
-                      .map((databerita) => (
-                        <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
+                      .map((databerita,index) => (
+                        <CardBerita key={index} data={databerita} />
                         // <CardBerita data={databerita} key={databerita._id} />
 
                       ))
@@ -82,7 +80,7 @@ const Beranda = () => {
               <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
                 <h5>Selengkapnya {">"} </h5>
               </div>
-              <div className="wrapper">
+              <div className="wrapper px-4">
                 {
                   loading ? (
                     // ------THIS SKELETON AT LOADING
@@ -94,8 +92,8 @@ const Beranda = () => {
                   ) : (
                     berita && berita
                       .filter(databerita => databerita.kategori == "Ekonomi")
-                      .map((databerita) => (
-                        <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
+                      .map((databerita,index) => (
+                        <CardBerita key={index} data={databerita} />
                       ))
                   )
                 }
@@ -111,7 +109,7 @@ const Beranda = () => {
               <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
                 <h5>Selengkapnya {">"} </h5>
               </div>
-              <div className="wrapper">
+              <div className="wrapper px-4">
                 {
                   // ------THIS SKELETON AT LOADING
                   loading ? (
@@ -123,8 +121,8 @@ const Beranda = () => {
                   ) : (
                     berita && berita
                       .filter(databerita => databerita.kategori == "Otomotif")
-                      .map((databerita) => (
-                        <CardBerita id={databerita._id} gambar={databerita.gambarberita} judul={databerita.judul} key={databerita._id} />
+                      .map((databerita,index) => (
+                        <CardBerita key={index} data={databerita} />
                       ))
                   )
                 }

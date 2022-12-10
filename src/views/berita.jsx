@@ -6,12 +6,31 @@ import { useState } from "react";
 import ColumnRight from "../components/columnRight";
 import parse from 'html-react-parser';
 import Skeleton from "@mui/material/Skeleton";
+import { useParams } from 'react-router-dom';
 
 const Berita = () => {
   const [berita, setBerita] = useState()
   const [kategori, setKategori] = useState('ALL')
   const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
+
+  const params = useParams();
+  const id = params.id
+  // const [idcate, setidcate] = useState()
+
+
+  useEffect(() => {
+    if (id !== null) {
+      axios.
+      get(`http://localhost:3003/category/${id}`)
+      .then((res) => {
+        const news = res.data;
+        setBerita(news);
+        setLoading(false)
+      })
+    }
+  }, [])
+  
 
   useEffect(() => {
     axios.
@@ -50,10 +69,10 @@ const Berita = () => {
           <div className="col-8 p-3" style={{ backgroundColor: "#FFFFFF" }}>
 
             {/* Berita Sumut */}
-            <div className="row mt-3 mb-5">
+            
 
               <div
-                className="col-md-7 subtitle mb-4" >
+                className="col-md-8 subtitle mb-4" >
                 <h2 className="fw-bold">{kategori} </h2>
               </div>
 
@@ -65,7 +84,7 @@ const Berita = () => {
                 }
               </div>
 
-            </div>
+           
             {
               loading ? (
                 // ------THIS SKELETON AT LOADING
@@ -115,10 +134,8 @@ const Berita = () => {
                 (
                   <div className="row">
                     {
-                      berita && berita.map((databerita) => (
-                        <CardBerita2 id={databerita._id} gambar={databerita.gambarberita} size='20px' judul={databerita.judul} content={parse(databerita.isiBerita.substring(databerita.isiBerita.indexOf(`style="`) + 40, 400))} key={databerita._id} />
-                        // <CardBerita data={databerita} key={databerita._id} />
-
+                      berita && berita.map((databerita,index) => (
+                        <CardBerita2 key={index} data={databerita} size='20px' content={parse(databerita.isiBerita.substring(databerita.isiBerita.indexOf(`style="`) + 40, 400))} />
                       ))
                     }
                   </div>
@@ -130,7 +147,7 @@ const Berita = () => {
           </div>
 
           {/* Column Right */}
-          <div className="col-3 py-4 p-1 pe-0" style={{ backgroundColor: "#FFFFFF" }}>
+          <div className="col-3 py-4" style={{ backgroundColor: "#FFFFFF" }}>
             <ColumnRight />
           </div>
 

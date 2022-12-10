@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const CardBerita2 = ({ id, judul, gambar,content,size }) => {
+const CardBerita2 = ({ data,size,content }) => {
     let navigate = useNavigate();
     const jalan = (id) => {
         navigate("/berita/" + id);
@@ -9,11 +9,11 @@ const CardBerita2 = ({ id, judul, gambar,content,size }) => {
 
     return (
         <>
-        <div className="row mb-3" onClick={() => jalan(id)}>
+        <div className="row mb-3" onClick={() => jalan(data._id)}>
 
             <div className="col-md-5 ">
                 <img
-                    src={gambar}
+                    src={data.gambarberita}
                     alt=""
                     width="930"
                     className="img-fluid"
@@ -22,7 +22,7 @@ const CardBerita2 = ({ id, judul, gambar,content,size }) => {
 
             <div className="col-md-7 ps-1">
                 <div className="text-dark fw-bold" style={{fontSize:size}}>
-                    {judul}
+                    {data.judul}
                 </div>
 
                 <div className="text-dark mt-2 fs-6">
