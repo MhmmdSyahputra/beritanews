@@ -13,16 +13,20 @@ const Berita = () => {
   const [kategori, setKategori] = useState('ALL')
   const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
-
+  
+  // MENGAMBIL DATA YG ADA DI URL JIKA ADA
   const params = useParams();
-  const id = params.id
-  // const [idcate, setidcate] = useState()
-
+  const getNameCate = params.id
 
   useEffect(() => {
-    if (id !== null) {
+    // JIKA DATA DI URL ADA MAKA SET KATEGORI MENJADI DATA URL ITU
+    if (getNameCate) {
+      setKategori(getNameCate)
+    }
+    // JIKA DATA URL TIDAK ADA MAKA TAMPILKAN SEMUA BERITA
+    else{
       axios.
-      get(`http://localhost:3003/category/${id}`)
+      get(`http://localhost:3003/news/`)
       .then((res) => {
         const news = res.data;
         setBerita(news);
@@ -31,17 +35,7 @@ const Berita = () => {
     }
   }, [])
   
-
-  useEffect(() => {
-    axios.
-      get(`http://localhost:3003/news/`)
-      .then((res) => {
-        const news = res.data;
-        setBerita(news);
-        setLoading(false)
-      })
-  }, [])
-
+  // MENAMPILKAN SEMUA KATEGORIES
   useEffect(() => {
     axios.
       get(`http://localhost:3003/category/`)
@@ -51,6 +45,7 @@ const Berita = () => {
       })
   }, [])
 
+  // JIKA PADA STATE KATEGORI TERJADI PERUBAHAN MAKA CARI DATA BERITA BERDASARKAN STATE KATEGORI ITU
   useEffect(() => {
     axios.
       get(`http://localhost:3003/news/cate/${kategori}`)
@@ -68,14 +63,13 @@ const Berita = () => {
         <div className="row justify-content-around">
           <div className="col-8 p-3" style={{ backgroundColor: "#FFFFFF" }}>
 
-            {/* Berita Sumut */}
-            
-
+              {/* LABEL CATEGORI */}
               <div
                 className="col-md-8 subtitle mb-4" >
                 <h2 className="fw-bold">{kategori} </h2>
               </div>
 
+              {/* LIST CATEGORI IN BTN */}
               <div className="">
                 {
                   kategories && kategories.map((resCategories) => (
@@ -132,6 +126,7 @@ const Berita = () => {
               )
                 :
                 (
+                  // MENCETAK CARDBERITA2 DENGAN MENGIRIMKAN DATA YG SUDAH DI FETCH DI ATAS
                   <div className="row">
                     {
                       berita && berita.map((databerita,index) => (

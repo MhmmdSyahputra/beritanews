@@ -5,10 +5,15 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 
+// INI COMPONENT UNTUK MENAMPILKAN CAROUSEL 
+
 const ComponentCarousel = () => {
   const [berita, setBerita] = useState()
+
+  // SET DEFAULT LOADING TRUE
   const [loading, setLoading] = useState(true)
 
+  // KETIGA HALAMAN DI LOAD AMBIL SEMUA DATA BERITA 
   useEffect(() => {
     axios.
       get('http://localhost:3003/news/')
@@ -24,8 +29,10 @@ const ComponentCarousel = () => {
     <Carousel fade>
       {
         loading ? (
+          // JIKA LOADING MASIH TRUE MAKA TAMPILKAN SKELETON SAJA
           <Skeleton variant="rectangular" width='100%' height={400} />
         ) : (
+          // JIKA LOADING SUDAH FALSE TAMPILKAN DATA YG DIDAPAT DAN DIBATASI HANYA DATA YG INDEX KE 2,6 SAJA YG TAMPIL
           berita && berita.map((data) => (
             <Carousel.Item key={data._id}>
               <img

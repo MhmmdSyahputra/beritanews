@@ -15,6 +15,7 @@ const Pages = () => {
 
         <Route exact path='/' element={<Beranda />} />
         <Route exact path='/allBerita' element={<Berita />} />
+        <Route exact path='/allBerita/:id' element={<Berita />} />
         <Route exact path='/kategori' element={<Kategori />} />
         <Route exact path='/newnews' element={<Addnews />} />
         <Route exact path='/berita/:id' element={<Detailberita />} />

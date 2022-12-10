@@ -8,12 +8,16 @@ import ColumnRight from '../components/columnRight';
 
 
 const Detailberita = () => {
+
   const params = useParams();
+  // MENGAMBIL ID DARI URL YG DIKIRIM 
   const id = params.id
 
   const [berita, setBerita] = useState()
 
+  
   useEffect(() => {
+    // MENGAMBIL DATA BERITA BERDASARKAN ID YG TERDAPAT DI URL TADI 
     axios.
       get(`http://localhost:3003/news/${id}`)
       .then((res) => {
@@ -22,6 +26,7 @@ const Detailberita = () => {
       })
   }, [])
 
+  // JIKA TERDAPAT PERUBAHAN PADA STATE ID MAKA AMBIL ULANG BERDASARKAN ID YG DI SET ULANG TADI
   useEffect(() => {
     axios.
       get(`http://localhost:3003/news/${id}`)
@@ -35,13 +40,12 @@ const Detailberita = () => {
   return (
     <>
 
-
       <div className="container-fluid mt-4 ">
         <div className="row justify-content-around">
           <div className="col-8 p-5" style={{ backgroundColor: "#FFFFFF" }}>
 
 
-            {/* detail */}
+            {/* DETAIL BERITA */}
             {
               berita && berita.map((data) => (
                 <div className="sumut mt-3 mb-5" key={data._id}>

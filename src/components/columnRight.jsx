@@ -6,11 +6,14 @@ import { useEffect } from "react";
 import KategoriComp from '../components/kategori';
 import Skeleton from "@mui/material/Skeleton";
 
+// COMPONENT INI COMPONENT YG SELALU ADA DI SEBELAHA KANAN TIAP HALAMAN 
+
 const ColumnRight = () => {
   const [berita, setBerita] = useState()
   const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
 
+  // SAAT HALAMAN PERTAMA KALI DI LOAD AMBIL SEMUA DATA CATEGORI YG ADA 
   useEffect(() => {
     axios.
       get(`http://localhost:3003/category/`)
@@ -22,6 +25,7 @@ const ColumnRight = () => {
       })
   }, [])
 
+  // SAAT HALAMAN PERTAMA KALI DI LOAD AMBIL SEMUA DATA BERITA YG ADA 
   useEffect(() => {
     axios.
       get('http://localhost:3003/news/')
@@ -118,6 +122,7 @@ const ColumnRight = () => {
             </div>
 
           ) : (
+            // JIKA LOADING SUDAH FALSE MAKA RENDER COMPONENT cardBerita2 DENGAN MENGIRIM DATA DATA YG SUDAH DI FETCH DIATAS DAN DI BATASI DARI INDEX KE 0 SAMPAI KE 6 SAJA
             berita && berita.map((databerita,index) => (
               <CardBerita2 key={index} data={databerita} size={'0.78em'} />
             )).slice(0, 6)
@@ -160,7 +165,7 @@ const ColumnRight = () => {
             </div>
 
           ) : (
-
+            // JIKA LOADING SUDAH FALSE MAKA RENDER COMPONENT KATEGORI DENGAN MENGIRIMKAN DATA DATA YG SUDAH DI FETCH DIATAS TADI 
             kategories && kategories.map((resCate,index) => (
               <KategoriComp fontsize='fs-6' col='col-md-6' heightimg='130px' addclass='imgcardnews' key={index} data={resCate} />
             ))

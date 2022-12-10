@@ -1,14 +1,19 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
+//COMPONENT INI CARD CARD BERITA DENGAN BERISI GAMBAR BERITA,JUDUL DAN CONTENT NYA(TIDAKBESEMUA)
+
 const CardBerita2 = ({ data,size,content }) => {
     let navigate = useNavigate();
+
+    // JIKA FUNGSI INI DIPANGGIL MAKA LEMPAR DIA KE PATH berita DENGAN MEBAWAKAN ID DARI BERITA UNTUK DITAMPILKAN DI HALAMAN DETAIL BERITA 
     const jalan = (id) => {
         navigate("/berita/" + id);
     }
 
     return (
         <>
+        {/* JIKA CARD DI CLICK MAKA JALANKAN FUNGSI jalan DENGAN MELEMPARKAN ID DARI BERITA ITU */}
         <div className="row mb-3" onClick={() => jalan(data._id)}>
 
             <div className="col-md-5 ">

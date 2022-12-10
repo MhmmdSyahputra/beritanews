@@ -10,14 +10,18 @@ import Skeleton from "@mui/material/Skeleton";
 const Beranda = () => {
 
   const [berita, setBerita] = useState()
+
+  // SET DEFAULT LOADING TRUE
   const [loading, setLoading] = useState(true)
 
+  // AMBIL SEMUA DATA BERITA SAAT HALAMAN PERTAMA KALI DI LOAD
   useEffect(() => {
     axios.
       get('http://localhost:3003/news/')
       .then((res) => {
         const news = res.data;
         setBerita(news);
+        // JIKA DATA SUDAH DAPAT MAKA SET LOADING MENJADI FALSE
         setLoading(false);
       })
   }, [])
@@ -39,7 +43,7 @@ const Beranda = () => {
                 </div>
               </div>
 
-            {/* Berita Sumut */}
+            {/* BERITA TEKNOLOGI */}
             <div className="sumut mt-3 mb-5">
               <div
                 className="subtitle mb-4">
@@ -50,6 +54,7 @@ const Beranda = () => {
               </div>
               <div className="wrapper px-4">
                 {
+                  // JIKA LOADING MASIH TRUE MAKA TAMPILKAN SKELETON
                   loading ? (
                     <div className="row">
                       <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
@@ -57,21 +62,18 @@ const Beranda = () => {
                       <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
                     </div>
                   ) : (
+                    // JIKA LOADING SUDAH FALSE MAKA TAMPILKAN DATA YG SUDAH DI DAPAT DIATAS TADI
                     berita && berita
                       .filter(databerita => databerita.kategori == "Teknologi")
                       .map((databerita,index) => (
                         <CardBerita key={index} data={databerita} />
-                        // <CardBerita data={databerita} key={databerita._id} />
-
                       ))
-
                   )
-
                 }
               </div>
             </div>
 
-            {/* Berita Ekonomi */}
+            {/* BERITA EKONOMI */}
             <div className="ekonomi mt-3 mb-5">
               <div
                 className="subtitle mb-4">
@@ -100,7 +102,7 @@ const Beranda = () => {
               </div>
             </div>
 
-            {/* Berita Otomotif */}
+            {/* BERITA OTOMOTIF */}
             <div className="otomotif mt-3 mb-5">
               <div
                 className="subtitle mb-4">

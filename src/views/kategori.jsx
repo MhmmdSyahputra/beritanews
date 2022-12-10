@@ -10,6 +10,7 @@ const Kategori = () => {
   const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
 
+  // AMBIL DATA CATEGORI SAAT HALAMAN PERTAMA KALI DI LOAD 
   useEffect(() => {
     axios.
       get(`http://localhost:3003/category/`)
@@ -57,12 +58,11 @@ const Kategori = () => {
 
                   </div>
                 ) : (
+                  // JIKA LOADING SUDAH FALSE MAKA RENDER COMPONENT KATEGORI DENGAN MEMBAWA DATADATA YG SUDAH DI FETCH 
                   kategories && kategories.map((resCate,index) => (
                     <KategoriComp addclass='imgcardnews' key={index} data={resCate} />
                   ))
-
                 )
-
               }
             </div>
           </div>
