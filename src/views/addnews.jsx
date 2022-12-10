@@ -18,9 +18,16 @@ const Addnews = () => {
 
     const [update, setUpdate] = useState(false)
 
-    const [label, setlabel] = useState('+ Tambah')
-    
-
+    const loadData = () => {
+        axios.
+            get('http://localhost:3003/news/')
+            .then((res) => {
+                const news = res.data;
+                setBerita(news);
+                // JIKA DATA SUDAH DAPAT MAKA SET LOADING MENJADI FALSE
+                setLoading(false);
+            })
+    }
 
     // AMBIL SEMUA DATA BERITA SAAT HALAMAN PERTAMA KALI DI LOAD
     useEffect(() => {
@@ -34,10 +41,23 @@ const Addnews = () => {
             })
     }, [])
 
-    // useEffect(() => {
-    //     setlabel('Edit')
-    // }, [judul],[contentnews],[kategori],[tags],[judul])
+    const deleteNews = (id) => {
+        axios
+            .delete(`http://localhost:3003/news/${id}`)
+            .then(() => {
+                alert('data dihapus')
+                loadData()
 
+                setUpdate(false)
+                setJudul('')
+                setContentnews('')
+                setKategori('')
+                setTags([])
+                setIdberita('')
+            })
+    }
+
+    
     const simpan = () => {
         const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
         axios
@@ -49,6 +69,9 @@ const Addnews = () => {
                 tag: tags,
             })
             .then(function (response) {
+
+                loadData()
+
                 alert('data berhasil ditambah')
                 setJudul('')
                 setContentnews('')
@@ -59,44 +82,29 @@ const Addnews = () => {
             .catch(function (error) {
                 console.log(error);
             });
-
     }
 
-    const getNews=(id,judul,isi,kategori,tags)=>{
+    const getNews = (id, judul, isi, kategori, tags) => {
         setUpdate(true)
         setJudul(judul)
         setContentnews(isi)
         setKategori(kategori)
         setTags(tags)
         setIdberita(id)
-        
+
     }
 
-    const deleteNews=(id)=>{
-        axios
-            .delete(`http://localhost:3003/news/${id}`)
-            .then(()=>{
-                alert('data dihapus')
 
-                setUpdate(false)
-                setJudul()
-                setContentnews()
-                setKategori()
-                setTags()
-                setIdberita()
-            })
-            
-    }
 
     return (
         <>
             <div className="container-fluid mt-4 ">
                 <div className="row justify-content-around">
                     <div className="col-8 p-5" style={{ backgroundColor: "#FFFFFF" }}>
-                        <h2 className=''>{update?'Update':'Tambah'} Berita</h2>
-                        <div className='text-end'>{update?(
-                            <button type='button' onClick={()=>deleteNews(idberita)} className='btn btn-danger'>Hapus</button>
-                        ):''}</div>
+                        <h2 className=''>{update ? 'Update' : 'Tambah'} Berita</h2>
+                        <div className='text-end'>{update ? (
+                            <button type='button' onClick={() => deleteNews(idberita)} className='btn btn-danger'>Hapus</button>
+                        ) : ''}</div>
                         <div className="mt-5 form-news">
 
                             <div className="judul mt-3">
@@ -120,9 +128,10 @@ const Addnews = () => {
                             <div className="content mt-3">
                                 <div className="fs-5 fw-bold">Body</div>
                                 <CKEditor
-                                    // editor={classicEditor}
                                     content={contentnews}
-                                    onChange={(e) => setContentnews(e.target.content)}
+                                    events={{
+                                        "change": (e) => setContentnews(e.editor.getData())
+                                    }}
                                 />
 
                                 {/* <textarea
@@ -145,7 +154,7 @@ const Addnews = () => {
 
                             <div className="content mt-3 ">
                                 <button className="btn btn-success fw-bold" onClick={() => simpan()} style={{ width: '100%', height: '50px' }}>
-                                {update?'Update':'Tambah'}
+                                    {update ? 'Update' : 'Tambah'}
                                 </button>
                             </div>
 
@@ -242,7 +251,7 @@ const Addnews = () => {
                                     // JIKA LOADING SUDAH FALSE MAKA TAMPILKAN SEMUA BERITA
                                     berita && berita.map((databerita, index) => (
                                         <div className="row mb-3"
-                                        onClick={()=>getNews(databerita._id,databerita.judul,databerita.isiBerita,databerita.kategori,databerita.tag)}
+                                            onClick={() => getNews(databerita._id, databerita.judul, databerita.isiBerita, databerita.kategori, databerita.tag)}
                                         >
 
                                             <div className="col-md-5 ">
