@@ -18,6 +18,19 @@ const Addnews = () => {
     const [loading, setLoading] = useState(true)
     const [update, setUpdate] = useState(false)
 
+    const [kategories, setKategories] = useState()
+
+    // AMBIL DATA CATEGORI SAAT HALAMAN PERTAMA KALI DI LOAD 
+    useEffect(() => {
+        axios.
+            get(`http://localhost:3003/category/`)
+            .then((res) => {
+                const categories = res.data;
+                setKategories(categories);
+                setLoading(false);
+            })
+    }, [])
+
     const loadData = () => {
         axios.
             get('http://localhost:3003/news/')
@@ -82,24 +95,29 @@ const Addnews = () => {
                     console.log(error);
                 });
         } else {
-
-            const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
-            axios
-                .post('http://localhost:3003/news/', {
-                    judul: judul,
-                    kategori: kategori,
-                    gambarberita: img,
-                    isiBerita: contentnews,
-                    tag: tags,
-                })
-                .then(function (response) {
-                    alert('data berhasil ditambah')
-                    loadData()
-                    setValueEmpty()
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            if (judul == '' || kategori == '' || contentnews == '' || tags == '') {
+                
+                alert('Gagal! Data Masih Ada yang Kosong')
+                
+            }else{
+                const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
+                axios
+                    .post('http://localhost:3003/news/', {
+                        judul: judul,
+                        kategori: kategori,
+                        gambarberita: img,
+                        isiBerita: contentnews,
+                        tag: tags,
+                    })
+                    .then(function (response) {
+                        alert('data berhasil ditambah')
+                        loadData()
+                        setValueEmpty()
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
     }
 
@@ -133,13 +151,18 @@ const Addnews = () => {
                             <div className="kategori mt-3">
                                 <div className="fs-5 fw-bold">Kategori</div>
                                 <select value={kategori} onChange={(e) => setKategori(e.target.value)} className='form-control'>
-                                    <option>Teknologi</option>
-                                    <option>Ekonomi</option>
+                                    <option value="" selected disabled hidden>Choose here</option>
+                                    {
+                                        kategories && kategories.map((cates)=>(
+                                            <option>{cates.nameKategory}</option>
+                                        ))
+                                    }
+                                    {/* <option>Ekonomi</option>
                                     <option>Hukum</option>
                                     <option>Bola</option>
                                     <option>Kesehatan</option>
                                     <option>Politik</option>
-                                    <option>Otomotif</option>
+                                    <option>Otomotif</option> */}
                                 </select>
                             </div>
 
