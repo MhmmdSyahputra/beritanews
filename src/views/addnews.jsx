@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 
 const Addnews = () => {
+
     const [idberita, setIdberita] = useState()
     const [judul, setJudul] = useState('')
     const [contentnews, setContentnews] = useState('')
@@ -15,7 +16,6 @@ const Addnews = () => {
     const [tags, setTags] = useState([]);
     const [berita, setBerita] = useState()
     const [loading, setLoading] = useState(true)
-
     const [update, setUpdate] = useState(false)
 
     const loadData = () => {
@@ -27,6 +27,15 @@ const Addnews = () => {
                 // JIKA DATA SUDAH DAPAT MAKA SET LOADING MENJADI FALSE
                 setLoading(false);
             })
+    }
+
+    const setValueEmpty = () => {
+        setUpdate(false)
+        setJudul('')
+        setContentnews('')
+        setKategori('')
+        setTags([])
+        setIdberita('')
     }
 
     // AMBIL SEMUA DATA BERITA SAAT HALAMAN PERTAMA KALI DI LOAD
@@ -41,47 +50,57 @@ const Addnews = () => {
             })
     }, [])
 
+
     const deleteNews = (id) => {
         axios
             .delete(`http://localhost:3003/news/${id}`)
             .then(() => {
                 alert('data dihapus')
                 loadData()
-
-                setUpdate(false)
-                setJudul('')
-                setContentnews('')
-                setKategori('')
-                setTags([])
-                setIdberita('')
+                setValueEmpty()
             })
     }
 
-    
+
     const simpan = () => {
-        const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
-        axios
-            .post('http://localhost:3003/news/', {
-                judul: judul,
-                kategori: kategori,
-                gambarberita: img,
-                isiBerita: contentnews,
-                tag: tags,
-            })
-            .then(function (response) {
+        if (update == true) {
+            const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
+            axios
+                .put(`http://localhost:3003/news/${idberita}`, {
+                    judul: judul,
+                    kategori: kategori,
+                    gambarberita: img,
+                    isiBerita: contentnews,
+                    tag: tags,
+                })
+                .then(function (response) {
+                    alert('data berhasil diupdate')
+                    loadData()
+                    setValueEmpty()
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else {
 
-                loadData()
-
-                alert('data berhasil ditambah')
-                setJudul('')
-                setContentnews('')
-                setKategori('')
-                setTags([])
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
+            axios
+                .post('http://localhost:3003/news/', {
+                    judul: judul,
+                    kategori: kategori,
+                    gambarberita: img,
+                    isiBerita: contentnews,
+                    tag: tags,
+                })
+                .then(function (response) {
+                    alert('data berhasil ditambah')
+                    loadData()
+                    setValueEmpty()
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 
     const getNews = (id, judul, isi, kategori, tags) => {
@@ -91,7 +110,6 @@ const Addnews = () => {
         setKategori(kategori)
         setTags(tags)
         setIdberita(id)
-
     }
 
 

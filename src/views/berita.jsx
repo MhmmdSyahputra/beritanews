@@ -16,7 +16,7 @@ const Berita = () => {
   
   // MENGAMBIL DATA YG ADA DI URL JIKA ADA
   const params = useParams();
-  const getNameCate = params.id
+  const [getNameCate,setGetNameCate] = useState(params.id)
 
   useEffect(() => {
     // JIKA DATA DI URL ADA MAKA SET KATEGORI MENJADI DATA URL ITU
@@ -55,6 +55,16 @@ const Berita = () => {
         setLoading(false)
       })
   }, [kategori])
+
+  useEffect(() => {
+    axios.
+      get(`http://localhost:3003/news/cate/${getNameCate}`)
+      .then((res) => {
+        const news = res.data;
+        setBerita(news);
+        setLoading(false)
+      })
+  }, [getNameCate])
 
 
   return (
