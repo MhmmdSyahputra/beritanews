@@ -7,6 +7,8 @@ import ColumnRight from "../components/columnRight";
 import parse from 'html-react-parser';
 import Skeleton from "@mui/material/Skeleton";
 import { useParams } from 'react-router-dom';
+import { API_URL } from '../utils/constans'
+
 
 const Berita = () => {
   const [berita, setBerita] = useState()
@@ -26,7 +28,7 @@ const Berita = () => {
     // JIKA DATA URL TIDAK ADA MAKA TAMPILKAN SEMUA BERITA
     else{
       axios.
-      get(`http://localhost:3003/news/`)
+      get(API_URL + `news/`)
       .then((res) => {
         const news = res.data;
         setBerita(news);
@@ -38,7 +40,7 @@ const Berita = () => {
   // MENAMPILKAN SEMUA KATEGORIES
   useEffect(() => {
     axios.
-      get(`http://localhost:3003/category/`)
+      get(API_URL + `category/`)
       .then((res) => {
         const categories = res.data;
         setKategories(categories);
@@ -48,7 +50,7 @@ const Berita = () => {
   // JIKA PADA STATE KATEGORI TERJADI PERUBAHAN MAKA CARI DATA BERITA BERDASARKAN STATE KATEGORI ITU
   useEffect(() => {
     axios.
-      get(`http://localhost:3003/news/cate/${kategori}`)
+      get(API_URL + `news/cate/${kategori}`)
       .then((res) => {
         const news = res.data;
         setBerita(news);
@@ -58,7 +60,7 @@ const Berita = () => {
 
   useEffect(() => {
     axios.
-      get(`http://localhost:3003/news/cate/${getNameCate}`)
+      get(API_URL + `news/cate/${getNameCate}`)
       .then((res) => {
         const news = res.data;
         setBerita(news);

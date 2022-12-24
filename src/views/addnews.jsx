@@ -5,7 +5,7 @@ import { TagsInput } from "react-tag-input-component";
 import axios from 'axios';
 import Skeleton from "@mui/material/Skeleton";
 import { useEffect } from "react";
-
+import { API_URL } from '../utils/constans'
 
 const Addnews = () => {
 
@@ -23,7 +23,7 @@ const Addnews = () => {
     // AMBIL DATA CATEGORI SAAT HALAMAN PERTAMA KALI DI LOAD 
     useEffect(() => {
         axios.
-            get(`http://localhost:3003/category/`)
+            get(API_URL + `category/`)
             .then((res) => {
                 const categories = res.data;
                 setKategories(categories);
@@ -33,7 +33,7 @@ const Addnews = () => {
 
     const loadData = () => {
         axios.
-            get('http://localhost:3003/news/')
+            get(API_URL + 'news/')
             .then((res) => {
                 const news = res.data;
                 setBerita(news);
@@ -54,7 +54,7 @@ const Addnews = () => {
     // AMBIL SEMUA DATA BERITA SAAT HALAMAN PERTAMA KALI DI LOAD
     useEffect(() => {
         axios.
-            get('http://localhost:3003/news/')
+            get(API_URL + 'news/')
             .then((res) => {
                 const news = res.data;
                 setBerita(news);
@@ -66,7 +66,7 @@ const Addnews = () => {
 
     const deleteNews = (id) => {
         axios
-            .delete(`http://localhost:3003/news/${id}`)
+            .delete(API_URL + `news/${id}`)
             .then(() => {
                 alert('data dihapus')
                 loadData()
@@ -79,7 +79,7 @@ const Addnews = () => {
         if (update == true) {
             const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
             axios
-                .put(`http://localhost:3003/news/${idberita}`, {
+                .put(API_URL + `news/${idberita}`, {
                     judul: judul,
                     kategori: kategori,
                     gambarberita: img,
@@ -102,7 +102,7 @@ const Addnews = () => {
             }else{
                 const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
                 axios
-                    .post('http://localhost:3003/news/', {
+                    .post(API_URL + 'news/', {
                         judul: judul,
                         kategori: kategori,
                         gambarberita: img,
@@ -157,12 +157,6 @@ const Addnews = () => {
                                             <option>{cates.nameKategory}</option>
                                         ))
                                     }
-                                    {/* <option>Ekonomi</option>
-                                    <option>Hukum</option>
-                                    <option>Bola</option>
-                                    <option>Kesehatan</option>
-                                    <option>Politik</option>
-                                    <option>Otomotif</option> */}
                                 </select>
                             </div>
 

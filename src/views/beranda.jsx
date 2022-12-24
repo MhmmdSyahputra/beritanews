@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import ColumnRight from "../components/columnRight";
 import Skeleton from "@mui/material/Skeleton";
+import { API_URL } from '../utils/constans'
+
 
 const Beranda = () => {
 
@@ -17,7 +19,7 @@ const Beranda = () => {
   // AMBIL SEMUA DATA BERITA SAAT HALAMAN PERTAMA KALI DI LOAD
   useEffect(() => {
     axios.
-      get('http://localhost:3003/news/')
+      get(API_URL + 'news/')
       .then((res) => {
         const news = res.data;
         setBerita(news);

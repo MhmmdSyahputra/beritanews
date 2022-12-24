@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useState } from "react";
 import parse from 'html-react-parser';
 import ColumnRight from '../components/columnRight';
+import { API_URL } from '../utils/constans'
 
 
 const Detailberita = () => {
@@ -19,7 +20,7 @@ const Detailberita = () => {
   useEffect(() => {
     // MENGAMBIL DATA BERITA BERDASARKAN ID YG TERDAPAT DI URL TADI 
     axios.
-      get(`http://localhost:3003/news/${id}`)
+      get(API_URL + `news/${id}`)
       .then((res) => {
         const news = res.data;
         setBerita(news);
@@ -29,7 +30,7 @@ const Detailberita = () => {
   // JIKA TERDAPAT PERUBAHAN PADA STATE ID MAKA AMBIL ULANG BERDASARKAN ID YG DI SET ULANG TADI
   useEffect(() => {
     axios.
-      get(`http://localhost:3003/news/${id}`)
+      get(API_URL + `news/${id}`)
       .then((res) => {
         const news = res.data;
         setBerita(news);

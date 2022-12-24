@@ -5,6 +5,8 @@ import axios from 'axios'
 import { useEffect } from "react";
 import { useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
+import { API_URL } from '../utils/constans'
+
 
 const Kategori = () => {
   const [kategories, setKategories] = useState()
@@ -13,7 +15,7 @@ const Kategori = () => {
   // AMBIL DATA CATEGORI SAAT HALAMAN PERTAMA KALI DI LOAD 
   useEffect(() => {
     axios.
-      get(`http://localhost:3003/category/`)
+      get(API_URL + `category/`)
       .then((res) => {
         const categories = res.data;
         setKategories(categories);

@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useEffect } from "react";
 import KategoriComp from '../components/kategori';
 import Skeleton from "@mui/material/Skeleton";
+import { API_URL } from '../utils/constans'
 
 // COMPONENT INI COMPONENT YG SELALU ADA DI SEBELAHA KANAN TIAP HALAMAN 
 
@@ -16,7 +17,7 @@ const ColumnRight = () => {
   // SAAT HALAMAN PERTAMA KALI DI LOAD AMBIL SEMUA DATA CATEGORI YG ADA 
   useEffect(() => {
     axios.
-      get(`http://localhost:3003/category/`)
+      get(API_URL + `category/`)
       .then((res) => {
         const categories = res.data;
         setKategories(categories);
@@ -28,7 +29,7 @@ const ColumnRight = () => {
   // SAAT HALAMAN PERTAMA KALI DI LOAD AMBIL SEMUA DATA BERITA YG ADA 
   useEffect(() => {
     axios.
-      get('http://localhost:3003/news/')
+      get(API_URL + 'news/')
       .then((res) => {
         const news = res.data;
         // console.log(res.data);

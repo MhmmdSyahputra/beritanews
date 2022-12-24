@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useEffect } from "react";
 import { useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
+import { API_URL } from '../utils/constans'
+
 
 // INI COMPONENT UNTUK MENAMPILKAN CAROUSEL 
 
@@ -16,7 +18,7 @@ const ComponentCarousel = () => {
   // KETIGA HALAMAN DI LOAD AMBIL SEMUA DATA BERITA 
   useEffect(() => {
     axios.
-      get('http://localhost:3003/news/')
+      get(API_URL + 'news/')
       .then((res) => {
         const news = res.data;
         // console.log(res.data);
