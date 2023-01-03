@@ -33,7 +33,7 @@ const ColumnRight = () => {
       .then((res) => {
         const news = res.data;
         // console.log(res.data);
-        setBerita(news);
+        setBerita(news.sort((a, b) => b.tayang - a.tayang));
         setLoading(false);
       })
   }, [])

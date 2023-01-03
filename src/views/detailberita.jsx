@@ -56,6 +56,8 @@ const Detailberita = () => {
 
                   <div className="kategori mb-4 text-muted">
                     {data.kategori} | {data.tglCreate.slice(0, 10)} | {data.tglCreate.slice(12, 19)}
+                    <br />
+                    <i class="fa-solid fa-eye"></i> {data.tayang}x Dilihat
                   </div>
 
                   <div className="content">
