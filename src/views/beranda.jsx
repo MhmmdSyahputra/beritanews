@@ -9,16 +9,21 @@ import ColumnRight from "../components/columnRight";
 import Skeleton from "@mui/material/Skeleton";
 import { API_URL } from '../utils/constans'
 import parse from 'html-react-parser';
+import { useNavigate } from 'react-router-dom';
+
 
 const Beranda = () => {
 
   const [berita, setBerita] = useState()
 
+  let navigate = useNavigate();
   // SET DEFAULT LOADING TRUE
   const [loading, setLoading] = useState(true)
 
   const [dosearch, setDoSearch] = useState(false)
   const [searchval, setSearchVal] = useState('')
+
+  const [moreNewsCate, setMoreNewsCate] = useState('')
 
 
   useEffect(() => {
@@ -43,6 +48,14 @@ const Beranda = () => {
         setLoading(false);
       })
   }, [])
+
+  useEffect(() => {
+    if(moreNewsCate !== ''){
+      navigate("/allBerita/" + moreNewsCate);
+    }
+
+  }, [moreNewsCate])
+
 
   return (
 
@@ -85,8 +98,12 @@ const Beranda = () => {
             </div>
 
             {
+              // jika value search tidak kosong (sedang mencari) maka cari data dari value itu
               searchval != '' ? (
                 <div>
+                  <div className="fs-4 mb-3">
+                    result : <span className="fw-bold">{searchval}</span>
+                  </div>
                   {
                     berita && berita
                       .filter(databerita => databerita.judul.toLowerCase().includes(searchval.toLowerCase()))
@@ -110,7 +127,7 @@ const Beranda = () => {
                       className="subtitle mb-4">
                       <h2 className="fw-bold">Teknologi</h2>
                     </div>
-                    <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
+                    <div className="text-end mb-3" onClick={() => setMoreNewsCate('Teknologi')} style={{ color: '#3E3E3E',cursor:'pointer' }}>
                       <h5>Selengkapnya {">"} </h5>
                     </div>
                     <div className="wrapper px-4">
@@ -126,6 +143,8 @@ const Beranda = () => {
                           // JIKA LOADING SUDAH FALSE MAKA TAMPILKAN DATA YG SUDAH DI DAPAT DIATAS TADI
                           berita && berita
                             .filter(databerita => databerita.kategori == "Teknologi")
+                            .reverse()
+                            .slice(0, 3)
                             .map((databerita, index) => (
                               <CardBerita key={index} data={databerita} />
                             ))
@@ -140,7 +159,7 @@ const Beranda = () => {
                       className="subtitle mb-4">
                       <h2 className="fw-bold">Ekonomi</h2>
                     </div>
-                    <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
+                    <div className="text-end mb-3" onClick={() => setMoreNewsCate('Ekonomi')} style={{ color: '#3E3E3E',cursor:'pointer' }}>
                       <h5>Selengkapnya {">"} </h5>
                     </div>
                     <div className="wrapper px-4">
@@ -155,6 +174,8 @@ const Beranda = () => {
                         ) : (
                           berita && berita
                             .filter(databerita => databerita.kategori == "Ekonomi")
+                            .reverse()
+                            .slice(0, 3)
                             .map((databerita, index) => (
                               <CardBerita key={index} data={databerita} />
                             ))
@@ -169,7 +190,8 @@ const Beranda = () => {
                       className="subtitle mb-4">
                       <h2 className="fw-bold">Otomotif</h2>
                     </div>
-                    <div className="text-end mb-3" style={{ color: '#3E3E3E' }}>
+
+                    <div className="text-end mb-3" onClick={() => setMoreNewsCate('Otomotif')} style={{ color: '#3E3E3E',cursor:'pointer' }}>
                       <h5>Selengkapnya {">"} </h5>
                     </div>
                     <div className="wrapper px-4">
@@ -182,8 +204,11 @@ const Beranda = () => {
                             <Skeleton variant="rectangular" className='mx-2' width='250px' height={250} />
                           </div>
                         ) : (
+
                           berita && berita
                             .filter(databerita => databerita.kategori == "Otomotif")
+                            .reverse()
+                            .slice(0, 3)
                             .map((databerita, index) => (
                               <CardBerita key={index} data={databerita} />
                             ))

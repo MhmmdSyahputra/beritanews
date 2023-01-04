@@ -15,10 +15,10 @@ const Berita = () => {
   const [kategori, setKategori] = useState('ALL')
   const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
-  
+
   // MENGAMBIL DATA YG ADA DI URL JIKA ADA
   const params = useParams();
-  const [getNameCate,setGetNameCate] = useState(params.id)
+  const [getNameCate, setGetNameCate] = useState(params.id)
 
   useEffect(() => {
     // JIKA DATA DI URL ADA MAKA SET KATEGORI MENJADI DATA URL ITU
@@ -26,17 +26,17 @@ const Berita = () => {
       setKategori(getNameCate)
     }
     // JIKA DATA URL TIDAK ADA MAKA TAMPILKAN SEMUA BERITA
-    else{
+    else {
       axios.
-      get(API_URL + `news/`)
-      .then((res) => {
-        const news = res.data;
-        setBerita(news);
-        setLoading(false)
-      })
+        get(API_URL + `news/`)
+        .then((res) => {
+          const news = res.data;
+          setBerita(news);
+          setLoading(false)
+        })
     }
   }, [])
-  
+
   // MENAMPILKAN SEMUA KATEGORIES
   useEffect(() => {
     axios.
@@ -49,13 +49,23 @@ const Berita = () => {
 
   // JIKA PADA STATE KATEGORI TERJADI PERUBAHAN MAKA CARI DATA BERITA BERDASARKAN STATE KATEGORI ITU
   useEffect(() => {
+    if (kategori !== 'All') {
+      axios.
+        get(API_URL + `news/cate/${kategori}`)
+        .then((res) => {
+          const news = res.data;
+          setBerita(news);
+          setLoading(false)
+        })
+        return
+    }
     axios.
-      get(API_URL + `news/cate/${kategori}`)
-      .then((res) => {
-        const news = res.data;
-        setBerita(news);
-        setLoading(false)
-      })
+        get(API_URL + `news/`)
+        .then((res) => {
+          const news = res.data;
+          setBerita(news);
+          setLoading(false)
+        })
   }, [kategori])
 
   useEffect(() => {
@@ -75,22 +85,23 @@ const Berita = () => {
         <div className="row justify-content-around">
           <div className="col-8 p-3" style={{ backgroundColor: "#FFFFFF" }}>
 
-              {/* LABEL CATEGORI */}
-              <div
-                className="col-md-8 subtitle mb-4" >
-                <h2 className="fw-bold">{kategori} </h2>
-              </div>
+            {/* LABEL CATEGORI */}
+            <div
+              className="col-md-8 subtitle mb-4" >
+              <h2 className="fw-bold">{kategori} </h2>
+            </div>
 
-              {/* LIST CATEGORI IN BTN */}
-              <div className="">
-                {
-                  kategories && kategories.map((resCategories) => (
-                    <div className={"btn text-light m-2 fw-bold btn-primary " + (kategori === resCategories.nameKategory ? 'bg-primary' : '')} style={{ backgroundColor: '#094584' }} onClick={(e) => setKategori(resCategories.nameKategory)}>{resCategories.nameKategory}</div>
-                  ))
-                }
-              </div>
+            {/* LIST CATEGORI IN BTN */}
+            <div className="">
+              <div className={"btn text-light m-2 fw-bold btn-primary " + (kategori == 'All' ? 'bg-primary' : '')} style={{ backgroundColor: '#094584' }} onClick={(e) => setKategori('All')}>All</div>
+              {
+                kategories && kategories.map((resCategories) => (
+                  <div className={"btn text-light m-2 fw-bold btn-primary " + (kategori === resCategories.nameKategory ? 'bg-primary' : '')} style={{ backgroundColor: '#094584' }} onClick={(e) => setKategori(resCategories.nameKategory)}>{resCategories.nameKategory}</div>
+                ))
+              }
+            </div>
 
-           
+
             {
               loading ? (
                 // ------THIS SKELETON AT LOADING
@@ -141,7 +152,7 @@ const Berita = () => {
                   // MENCETAK CARDBERITA2 DENGAN MENGIRIMKAN DATA YG SUDAH DI FETCH DI ATAS
                   <div className="row">
                     {
-                      berita && berita.map((databerita,index) => (
+                      berita && berita.reverse().map((databerita, index) => (
                         <CardBerita2 key={index} data={databerita} size='20px' content={parse(databerita.isiBerita.substring(databerita.isiBerita.indexOf(`style="`) + 40, 400))} />
                       ))
                     }

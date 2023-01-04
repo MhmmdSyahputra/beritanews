@@ -6,6 +6,16 @@ body{
   text-align: center;
 }
 
+.input-login:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #ccc;
+}
+.input-login {
+  border: none;
+  border-bottom: 2px solid #ccc;
+}
+
 .subtitle{
   border-bottom: 2px #094584 solid;
   width: 60px;

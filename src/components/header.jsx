@@ -2,11 +2,17 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
 
 // COMPONENT INI BERISI HEADER DARI HALAMAN 
 
 const Header = () => {
+  const location = useLocation();
+  if (location.pathname === "/login" || location.pathname === "/signup") {
+    return null;
+  }
+
   return (
     <Navbar style={{ backgroundColor: '#094584' }} expand="lg" variant="dark">
       <Container className="fw-bold">

@@ -16,7 +16,30 @@ const Detailberita = () => {
 
   const [berita, setBerita] = useState()
 
-  
+  const getDayNews = (data) => {
+    const dateString = data
+    const [year, month, day] = dateString.split("-");
+    const date = new Date(year, month - 1, day);
+    const dayOfWeek = date.getDay();
+
+    if (dayOfWeek == 0) {
+      return 'Minggu'
+    }else if(dayOfWeek == 1){
+      return 'Senin'
+    }else if(dayOfWeek == 2){
+      return 'Selasa'
+    }else if(dayOfWeek == 3){
+      return 'Rabu'
+    }else if(dayOfWeek == 4){
+      return 'Kamis'
+    }else if(dayOfWeek == 5){
+      return 'Jumat'
+    }else if(dayOfWeek == 6){
+      return 'Sabtu'
+    }
+
+  }
+
   useEffect(() => {
     // MENGAMBIL DATA BERITA BERDASARKAN ID YG TERDAPAT DI URL TADI 
     axios.
@@ -55,7 +78,10 @@ const Detailberita = () => {
                   </div>
 
                   <div className="kategori mb-4 text-muted">
-                    {data.kategori} | {data.tglCreate.slice(0, 10)} | {data.tglCreate.slice(12, 19)}
+                    {
+
+                    }
+                    {data.kategori} | {getDayNews(data.tglCreate.slice(0, 10)) } | {data.tglCreate.slice(0, 10)} | {data.tglCreate.slice(12, 19)}
                     <br />
                     <i class="fa-solid fa-eye"></i> {data.tayang}x Dilihat
                   </div>

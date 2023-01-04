@@ -284,7 +284,9 @@ const Addnews = () => {
 
                                 ) : (
                                     // JIKA LOADING SUDAH FALSE MAKA TAMPILKAN SEMUA BERITA
-                                    berita && berita.map((databerita, index) => (
+                                    berita && berita
+                                    .reverse()
+                                    .map((databerita, index) => (
                                         <div className="row mb-3"
                                             onClick={() => getNews(databerita._id, databerita.judul, databerita.isiBerita, databerita.kategori, databerita.tag)}
                                         >
