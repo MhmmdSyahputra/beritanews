@@ -12,6 +12,16 @@ export const SignUp = () => {
 
     const Signup = (e) => {
         e.preventDefault();
+
+        if (firstname == '' || lastname == '' || email == '' || password == '') {
+            swal({
+                title: "Error!",
+                text: "Data Masih Ada Yang Kosong",
+                icon: "error",
+              });
+            emptyvalue()
+            return
+        }
         
         axios
         .post(API_URL + `system/registrasi/`, {
@@ -20,7 +30,7 @@ export const SignUp = () => {
             email: email,
             password: password,
         })
-        .then(function (response) {
+        .then((response) => {
             // console.log(response);
 
             // jika email sudah di pakai 
@@ -36,7 +46,7 @@ export const SignUp = () => {
 
             swal({
                 title: "Success!",
-                text: "Account Created Successfully",
+                text: response.data.message,
                 icon: "success",
               });
               emptyvalue()
