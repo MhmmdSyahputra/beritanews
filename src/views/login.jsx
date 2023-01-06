@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../utils/constans'
 import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
+    let navigate = useNavigate();
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -21,7 +23,7 @@ export const Login = () => {
                 email: email,
                 password: password,
             })
-            // .then((res) => res.json())
+            // .then((res) => res.json())   
             .then((data)=>{
                 emptyvalue()
                 // console.log(data);
@@ -38,8 +40,10 @@ export const Login = () => {
                         text: "yey",
                         icon: "success",
                       });               
-                      console.log(data.data);
-                    window.localStorage('token',data.data)       
+                    //   console.log(data.data.data);
+                      window.localStorage.setItem("token",JSON.stringify({ token: data.data.data, user: data.data.user }))       
+                    navigate("/SystemNews/");
+
                 }
             })
 

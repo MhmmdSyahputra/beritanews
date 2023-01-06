@@ -17,8 +17,28 @@ const Addnews = () => {
     const [berita, setBerita] = useState()
     const [loading, setLoading] = useState(true)
     const [update, setUpdate] = useState(false)
-
     const [kategories, setKategories] = useState()
+
+    const [username, setUsername] = useState()
+    const [email, setEmail] = useState()
+    
+
+
+    useEffect(() => {
+
+        // console.log(JSON.parse(window.localStorage.getItem("token")));
+        axios
+            .post(API_URL + 'system/onlyAdmin/', {
+                token: JSON.parse(window.localStorage.getItem("token"))
+            }).then((data) => {
+                setUsername(data.data.data.firstname+' '+data.data.data.lastname)
+                setEmail(data.data.data.email)
+                console.log('data',data.data);
+            }).catch((err)=>{
+                console.log(err);
+            })
+    }, [])
+
 
     // AMBIL DATA CATEGORI SAAT HALAMAN PERTAMA KALI DI LOAD 
     useEffect(() => {
@@ -96,10 +116,10 @@ const Addnews = () => {
                 });
         } else {
             if (judul == '' || kategori == '' || contentnews == '' || tags == '') {
-                
+
                 alert('Gagal! Data Masih Ada yang Kosong')
-                
-            }else{
+
+            } else {
                 const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
                 axios
                     .post(API_URL + 'news/', {
@@ -137,7 +157,7 @@ const Addnews = () => {
             <div className="container-fluid mt-4 ">
                 <div className="row justify-content-around">
                     <div className="col-8 p-5" style={{ backgroundColor: "#FFFFFF" }}>
-                        <h2 className=''>{update ? 'Update' : 'Tambah'} Berita</h2>
+                        <h2 className=''>{update ? 'Update' : 'Tambah'} {username} Berita</h2>
                         <div className='text-end'>{update ? (
                             <button type='button' onClick={() => deleteNews(idberita)} className='btn btn-danger'>Hapus</button>
                         ) : ''}</div>
@@ -153,7 +173,7 @@ const Addnews = () => {
                                 <select value={kategori} onChange={(e) => setKategori(e.target.value)} className='form-control'>
                                     <option value="" selected disabled hidden>Choose here</option>
                                     {
-                                        kategories && kategories.map((cates)=>(
+                                        kategories && kategories.map((cates) => (
                                             <option>{cates.nameKategory}</option>
                                         ))
                                     }
@@ -285,29 +305,29 @@ const Addnews = () => {
                                 ) : (
                                     // JIKA LOADING SUDAH FALSE MAKA TAMPILKAN SEMUA BERITA
                                     berita && berita
-                                    .reverse()
-                                    .map((databerita, index) => (
-                                        <div className="row mb-3"
-                                            onClick={() => getNews(databerita._id, databerita.judul, databerita.isiBerita, databerita.kategori, databerita.tag)}
-                                        >
+                                        .reverse()
+                                        .map((databerita, index) => (
+                                            <div className="row mb-3"
+                                                onClick={() => getNews(databerita._id, databerita.judul, databerita.isiBerita, databerita.kategori, databerita.tag)}
+                                            >
 
-                                            <div className="col-md-5 ">
-                                                <img
-                                                    src={databerita.gambarberita}
-                                                    alt=""
-                                                    width="930"
-                                                    className="img-fluid"
-                                                />
-                                            </div>
-
-                                            <div className="col-md-7 ps-1">
-                                                <div className="text-dark fw-bold" style={{ fontSize: '0.78em' }}>
-                                                    {databerita.judul}
+                                                <div className="col-md-5 ">
+                                                    <img
+                                                        src={databerita.gambarberita}
+                                                        alt=""
+                                                        width="930"
+                                                        className="img-fluid"
+                                                    />
                                                 </div>
 
+                                                <div className="col-md-7 ps-1">
+                                                    <div className="text-dark fw-bold" style={{ fontSize: '0.78em' }}>
+                                                        {databerita.judul}
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))
+                                        ))
                                 )
                             }
                         </div>

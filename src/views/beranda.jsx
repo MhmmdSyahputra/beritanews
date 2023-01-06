@@ -101,7 +101,7 @@ const Beranda = () => {
               // jika value search tidak kosong (sedang mencari) maka cari data dari value itu
               searchval != '' ? (
                 <div>
-                  <div className="fs-4 mb-3">
+                  <div className="fs-5 mb-3">
                     result : <span className="fw-bold">{searchval}</span>
                   </div>
                   {

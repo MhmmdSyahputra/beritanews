@@ -32,7 +32,7 @@ export const SignUp = () => {
         })
         .then((response) => {
             // console.log(response);
-
+            
             // jika email sudah di pakai 
             if (response.data.error) {
                 swal({
