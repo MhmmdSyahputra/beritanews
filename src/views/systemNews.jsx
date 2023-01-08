@@ -54,8 +54,6 @@ const Addnews = () => {
                 console.log(err);
             })
 
-
-
     }, [])
 
 
