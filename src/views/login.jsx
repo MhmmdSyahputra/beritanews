@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../utils/constans'
@@ -15,6 +15,15 @@ export const Login = () => {
         setEmail('')
         setPassword('')
     }
+
+    const local = JSON.parse(window.localStorage.getItem("token"))
+    useEffect(() => {
+        if (local) {
+            navigate("/SystemNews/");
+            return;
+        }
+    }, [])
+    
 
     const Masuk = (e) => {
         e.preventDefault()

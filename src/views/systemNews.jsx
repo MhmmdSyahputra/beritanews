@@ -33,7 +33,8 @@ const Addnews = () => {
 
 
         if (!local) {
-            // window.location.replace("login/");
+            // window.location.replace("/login");
+            window.history.pushState({}, '', '/login');
             navigate("/login");
             return;
         }
