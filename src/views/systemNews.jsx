@@ -26,24 +26,25 @@ const Addnews = () => {
     const [email, setEmail] = useState()
     const [firstload, setFirstLoad] = useState(false)
 
+    const local = JSON.parse(window.localStorage.getItem("token"))
 
 
     useEffect(() => {
 
-        const local = JSON.parse(window.localStorage.getItem("token"))
 
         if (!local) {
-            navigate("/login/");
+            // window.location.replace("login/");
+            navigate("/login");
             return;
         }
 
-        setFirstLoad(true)
-
+        
         console.log(JSON.parse(window.localStorage.getItem("token")));
         axios
-            .post(API_URL + 'system/onlyAdmin/', {
-                token: JSON.parse(window.localStorage.getItem("token"))
-            }).then((data) => {
+        .post(API_URL + 'system/onlyAdmin/', {
+            token: JSON.parse(window.localStorage.getItem("token"))
+        }).then((data) => {
+                setFirstLoad(true)
                 console.log(data)
                 setUsername(data.data.data.firstname + ' ' + data.data.data.lastname)
                 setEmail(data.data.data.email)
@@ -176,8 +177,8 @@ const Addnews = () => {
     return (
         <>
             {
-                !firstload ? '' : (
-
+                firstload && (
+                    
                     <div className="container-fluid mt-4 ">
                         <div className="row justify-content-around">
                             <div className="col-8 p-5" style={{ backgroundColor: "#FFFFFF" }}>
