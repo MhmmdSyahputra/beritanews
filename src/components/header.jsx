@@ -18,27 +18,31 @@ const Header = () => {
 
   const admin = JSON.parse(window.localStorage.getItem("token"))
 
+
   useEffect(() => {
 
-
     if (!admin) {
-      return;
+        return;
     }
 
-
-    console.log(JSON.parse(window.localStorage.getItem("token")));
+    // console.log(token);
     axios
-      .post(API_URL + 'system/onlyAdmin/', {
-        token: JSON.parse(window.localStorage.getItem("token"))
-      }).then((data) => {
-        setUsername(data.data.data.firstname + ' ' + data.data.data.lastname)
-        setEmail(data.data.data.email)
-        console.log('data', data.data);
-      }).catch((err) => {
-        console.log(err);
-      })
+        .post(API_URL + 'system/getUser', {
+            token: JSON.parse(window.localStorage.getItem("token")),
+        },{
+            headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': window.localStorage.getItem("token")
+        }
+        }).then((data) => {
+                setUsername(data.data.data.firstname + ' ' + data.data.data.lastname)
+                setEmail(data.data.data.email)
+            }).catch((err) => {
+                console.log(err);
+            })
 
-  }, [])
+        
+}, [])
 
   const Logout = () => {
     window.localStorage.removeItem("token");

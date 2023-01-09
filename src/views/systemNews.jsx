@@ -7,6 +7,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { useEffect } from "react";
 import { API_URL } from '../utils/constans'
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 const Addnews = () => {
@@ -28,32 +29,41 @@ const Addnews = () => {
 
     const local = JSON.parse(window.localStorage.getItem("token"))
 
-
     useEffect(() => {
-
 
         if (!local) {
             // window.location.replace("/login");
             window.history.pushState({}, '', '/login');
+            swal({
+                title: "Error!",
+                text: "Anda Tidak Memiliki Akses!",
+                icon: "warning",
+            });
             navigate("/login");
             return;
         }
 
-        
-        console.log(JSON.parse(window.localStorage.getItem("token")));
+        // console.log(token);
         axios
-        .post(API_URL + 'system/onlyAdmin/', {
-            token: JSON.parse(window.localStorage.getItem("token"))
-        }).then((data) => {
-                setFirstLoad(true)
-                console.log(data)
-                setUsername(data.data.data.firstname + ' ' + data.data.data.lastname)
-                setEmail(data.data.data.email)
-                console.log('data', data.data);
-            }).catch((err) => {
-                console.log(err);
-            })
+            .post(API_URL + 'system/getUser', {
+                token: JSON.parse(window.localStorage.getItem("token")),
+                
+            },{
+                headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': window.localStorage.getItem("token")
+            }
+            }).then((data) => {
+                    setFirstLoad(true)
+                    console.log(data)
+                    setUsername(data.data.data.firstname + ' ' + data.data.data.lastname)
+                    // setEmail(data.data.data.email)
+                    // console.log('data', data.data);
+                }).catch((err) => {
+                    console.log(err);
+                })
 
+            
     }, [])
 
 
@@ -177,7 +187,7 @@ const Addnews = () => {
         <>
             {
                 firstload && (
-                    
+
                     <div className="container-fluid mt-4 ">
                         <div className="row justify-content-around">
                             <div className="col-8 p-5" style={{ backgroundColor: "#FFFFFF" }}>
