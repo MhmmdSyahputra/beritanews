@@ -16,16 +16,16 @@ const Berita = () => {
   const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
 
-  // MENGAMBIL DATA YG ADA DI URL JIKA ADA
+  // MENGAMBIL DATA YG ADA DI URL JIKA ADA -------------------------------------------------------
   const params = useParams();
   const [getNameCate, setGetNameCate] = useState(params.id)
 
   useEffect(() => {
-    // JIKA DATA DI URL ADA MAKA SET KATEGORI MENJADI DATA URL ITU
+    // JIKA DATA DI URL ADA MAKA SET KATEGORI MENJADI DATA URL ITU ---------------------------------
     if (getNameCate) {
       setKategori(getNameCate)
     }
-    // JIKA DATA URL TIDAK ADA MAKA TAMPILKAN SEMUA BERITA
+    // JIKA DATA URL TIDAK ADA MAKA TAMPILKAN SEMUA BERITA -----------------------------------------
     else {
       axios.
         get(API_URL + `news/`)
@@ -37,7 +37,7 @@ const Berita = () => {
     }
   }, [])
 
-  // MENAMPILKAN SEMUA KATEGORIES
+  // MENAMPILKAN SEMUA KATEGORIES -------------------------------------------------------------------
   useEffect(() => {
     axios.
       get(API_URL + `category/`)

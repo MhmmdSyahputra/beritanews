@@ -11,7 +11,7 @@ import { API_URL } from '../utils/constans'
 const Detailberita = () => {
 
   const params = useParams();
-  // MENGAMBIL ID DARI URL YG DIKIRIM 
+  // MENGAMBIL ID DARI URL YG DIKIRIM ----------------------------------------------------------
   const id = params.id
 
   const [berita, setBerita] = useState()

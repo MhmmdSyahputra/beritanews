@@ -26,7 +26,9 @@ const Beranda = () => {
   const [moreNewsCate, setMoreNewsCate] = useState('')
 
 
+  // JALANKAN FUNGSI KETIKA ADA PERUBAHAN PADA INPUTSEARCH ---------------------------------------------------------
   useEffect(() => {
+    // JIKA SELAMA 10 DETIK TIDAK ADA PERUBAHAN PADA INPUTSERACH MAKA SET dosearch menjadi false -------------------
     let timeoutId = setTimeout(() => {
       setDoSearch(false);
       setSearchVal('');
@@ -37,18 +39,20 @@ const Beranda = () => {
     };
   }, [searchval]);
 
-  // AMBIL SEMUA DATA BERITA SAAT HALAMAN PERTAMA KALI DI LOAD
+  // AMBIL SEMUA DATA BERITA SAAT HALAMAN PERTAMA KALI DI LOAD ------------------------------------------------------
   useEffect(() => {
     axios.
       get(API_URL + 'news/')
       .then((res) => {
         const news = res.data;
         setBerita(news);
-        // JIKA DATA SUDAH DAPAT MAKA SET LOADING MENJADI FALSE
+        // JIKA DATA SUDAH DAPAT MAKA SET LOADING MENJADI FALSE ------------------------------------------------------
         setLoading(false);
       })
-  }, [])
-
+    }, [])
+    
+    
+  // JIKA TERJADI PERUBAHAN PADA moreNewsCate(moreberita) MAKA LEPAR KE ALLBERITA -------------------------------------
   useEffect(() => {
     if(moreNewsCate !== ''){
       navigate("/allBerita/" + moreNewsCate);

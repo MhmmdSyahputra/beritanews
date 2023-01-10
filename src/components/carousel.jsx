@@ -5,11 +5,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import { API_URL } from '../utils/constans'
-
+import { useNavigate } from 'react-router-dom';
 
 // INI COMPONENT UNTUK MENAMPILKAN CAROUSEL 
 
 const ComponentCarousel = () => {
+  let navigate = useNavigate();
   const [berita, setBerita] = useState()
 
   // SET DEFAULT LOADING TRUE
@@ -26,6 +27,18 @@ const ComponentCarousel = () => {
         setLoading(false)
       })
   }, [])
+
+  const jalan = (id) => {
+    axios
+        .put(API_URL + `news/tayang/${id}`, {})
+        .then(function (response) {
+            // alert('data berhasil diupdate')
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    navigate("/berita/" + id);
+      }
   return (
 
     <Carousel fade>
@@ -36,7 +49,7 @@ const ComponentCarousel = () => {
         ) : (
           // JIKA LOADING SUDAH FALSE TAMPILKAN DATA YG DIDAPAT DAN DIBATASI HANYA DATA YG INDEX KE 2,6 SAJA YG TAMPIL
           berita && berita.map((data) => (
-            <Carousel.Item key={data._id}>
+            <Carousel.Item key={data._id} onClick={()=>jalan(data._id)}>
               <img
                 className="imgcarousel d-block w-100"
                 src={data.gambarberita}

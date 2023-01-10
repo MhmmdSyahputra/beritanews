@@ -47,23 +47,23 @@ const Addnews = () => {
         axios
             .post(API_URL + 'system/getUser', {
                 token: JSON.parse(window.localStorage.getItem("token")),
-                
-            },{
-                headers: {
-                'Content-Type': 'application/json',
-                'x-access-token': window.localStorage.getItem("token")
-            }
-            }).then((data) => {
-                    setFirstLoad(true)
-                    console.log(data)
-                    setUsername(data.data.data.firstname + ' ' + data.data.data.lastname)
-                    // setEmail(data.data.data.email)
-                    // console.log('data', data.data);
-                }).catch((err) => {
-                    console.log(err);
-                })
 
-            
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': window.localStorage.getItem("token")
+                }
+            }).then((data) => {
+                setFirstLoad(true)
+                console.log(data)
+                setUsername(data.data.data.firstname + ' ' + data.data.data.lastname)
+                // setEmail(data.data.data.email)
+                // console.log('data', data.data);
+            }).catch((err) => {
+                console.log(err);
+            })
+
+
     }, [])
 
 
@@ -195,8 +195,8 @@ const Addnews = () => {
                                 <div className='text-end'>
                                     {update ? (
                                         <div>
-                                            <button type='button' onClick={() => setValueEmpty()} className='btn btn-warning mx-4'>Batal</button>
-                                            <button type='button' onClick={() => deleteNews(idberita)} className='btn btn-danger'>Hapus</button>
+                                            <button type='button' onClick={() => setValueEmpty()} className='btn btn-warning mx-4'><i className="fa-solid fa-ban me-1"></i>Cancel</button>
+                                            <button type='button' onClick={() => deleteNews(idberita)} className='btn btn-danger'> <i className="fa-solid fa-trash me-1"></i> Delete</button>
 
                                         </div>
                                     ) : ''}</div>
@@ -247,7 +247,18 @@ const Addnews = () => {
 
                                     <div className="content mt-3 ">
                                         <button className="btn btn-success fw-bold" onClick={() => simpan()} style={{ width: '100%', height: '50px' }}>
-                                            {update ? 'Update' : 'Tambah'}
+                                            {
+                                                update ? (
+                                                    <div>
+                                                        <i className="fa-solid fa-pen-to-square me-3"></i>Update
+                                                    </div>
+                                                )
+                                                    : (
+                                                        <div>
+                                                            <i className="fa-solid fa-plus me-3"></i>Tambah
+                                                        </div>
+                                                    )
+                                            }
                                         </button>
                                     </div>
 

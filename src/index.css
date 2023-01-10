@@ -12,10 +12,40 @@ code {
     monospace;
 }
 
+
+.input-login:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #ccc;
+}
+.input-login {
+  border: none;
+  border-bottom: 2px solid #ccc;
+}
+
+.subtitle{
+  border-bottom: 2px #094584 solid;
+  width: 60px;
+  color: #094584;
+}
+
+.imgcardnews{
+  filter: brightness(50%);
+  height:250px;
+  object-fit: cover;
+}
+
+.imgcarousel{
+  filter: brightness(50%);
+}
+
+.title-cate{
+  background-color: rgba(0,0,0,0.7)
+}
+
 .wrapper {
   max-width: 100%;
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
-  
 }
