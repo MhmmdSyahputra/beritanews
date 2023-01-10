@@ -25,6 +25,10 @@ const Beranda = () => {
 
   const [moreNewsCate, setMoreNewsCate] = useState('')
 
+  useEffect(() => {
+    document.title = "Beranda"
+  },[]);
+
 
   // JALANKAN FUNGSI KETIKA ADA PERUBAHAN PADA INPUTSEARCH ---------------------------------------------------------
   useEffect(() => {
@@ -64,6 +68,10 @@ const Beranda = () => {
   return (
 
     <>
+    <head>
+
+    <title>Beranda</title>
+    </head>
       <div className="container-fluid mt-4 ">
         <div className="row justify-content-around">
           <div className="col-8 p-3" style={{ backgroundColor: "#FFFFFF" }}>

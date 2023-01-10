@@ -41,6 +41,10 @@ const Detailberita = () => {
   }
 
   useEffect(() => {
+    document.title = "Detail"
+  },[]);
+
+  useEffect(() => {
     // MENGAMBIL DATA BERITA BERDASARKAN ID YG TERDAPAT DI URL TADI 
     axios.
       get(API_URL + `news/${id}`)

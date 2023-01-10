@@ -12,6 +12,10 @@ const Kategori = () => {
   const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    document.title = "Kategori"
+  },[]);
+
   // AMBIL DATA CATEGORI SAAT HALAMAN PERTAMA KALI DI LOAD 
   useEffect(() => {
     axios.

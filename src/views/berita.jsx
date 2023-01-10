@@ -21,6 +21,10 @@ const Berita = () => {
   const [getNameCate, setGetNameCate] = useState(params.id)
 
   useEffect(() => {
+    document.title = "Berita"
+  },[]);
+
+  useEffect(() => {
     // JIKA DATA DI URL ADA MAKA SET KATEGORI MENJADI DATA URL ITU ---------------------------------
     if (getNameCate) {
       setKategori(getNameCate)

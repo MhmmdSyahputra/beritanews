@@ -16,6 +16,10 @@ export const Login = () => {
         setPassword('')
     }
 
+    useEffect(() => {
+        document.title = "Login Admin"
+      },[]);
+
     const local = JSON.parse(window.localStorage.getItem("token"))
     // jika masih ada localStorage atau sudah Login(blm logout) maka lempar dia ke halaman admin langsung)
     useEffect(() => {

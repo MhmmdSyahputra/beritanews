@@ -30,6 +30,10 @@ const Addnews = () => {
     const local = JSON.parse(window.localStorage.getItem("token"))
 
     useEffect(() => {
+        document.title = "Admin Page"
+      },[]);
+
+    useEffect(() => {
 
         if (!local) {
             // window.location.replace("/login");

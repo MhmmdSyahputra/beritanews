@@ -10,6 +10,10 @@ export const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    useEffect(() => {
+        document.title = "SignUp"
+      },[]);
+
     const Signup = (e) => {
         e.preventDefault();
 
