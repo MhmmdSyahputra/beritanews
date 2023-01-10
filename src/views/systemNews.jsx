@@ -191,7 +191,9 @@ const Addnews = () => {
                     <div className="container-fluid mt-4 ">
                         <div className="row justify-content-around">
                             <div className="col-8 p-5" style={{ backgroundColor: "#FFFFFF" }}>
-                                <h2 className=''>{update ? 'Update' : 'Tambah'} {username} Berita</h2>
+                                <h2 className='mb-3 fs-4 fw-bold'>Selamat Datang {username}</h2>
+                                <hr />
+                                <h2 className=''>{update ? 'Update' : 'Tambah'}  Berita</h2>
                                 <div className='text-end'>
                                     {update ? (
                                         <div>
