@@ -115,7 +115,14 @@ const Addnews = () => {
 
     const deleteNews = (id) => {
         axios
-            .delete(API_URL + `news/${id}`)
+            .delete(API_URL + `news/${id}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': window.localStorage.getItem("token")
+                    }
+                })
+
             .then(() => {
                 alert('data dihapus')
                 loadData()
@@ -134,6 +141,11 @@ const Addnews = () => {
                     gambarberita: img,
                     isiBerita: contentnews,
                     tag: tags,
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': window.localStorage.getItem("token")
+                    }
                 })
                 .then(function (response) {
                     alert('data berhasil diupdate')
@@ -157,6 +169,12 @@ const Addnews = () => {
                         gambarberita: img,
                         isiBerita: contentnews,
                         tag: tags,
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': window.localStorage.getItem("token")
+                        }
                     })
                     .then(function (response) {
                         alert('data berhasil ditambah')
