@@ -40,6 +40,10 @@ const CardBerita2 = ({ data, size, content }) => {
                         {data.judul}
                     </div>
 
+                    <div className="text-muted ">
+                        <i className="fa-solid fa-eye "></i> {data.tayang}x
+                    </div>
+
                     <div className="text-dark mt-2 fs-6">
                         {content}
                     </div>
