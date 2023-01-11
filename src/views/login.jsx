@@ -59,6 +59,12 @@ export const Login = () => {
                     navigate("/SystemNews/");
 
                 }
+            }).catch((err)=>{
+                swal({
+                    title: "Gagal!",
+                    text: 'Ada yang Salah Dengan Server',
+                    icon: "error",
+                  });
             })
 
     }

@@ -56,9 +56,13 @@ export const SignUp = () => {
               emptyvalue()
             
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch((err)=>{
+            swal({
+                title: "Gagal!",
+                text: 'Ada yang Salah Dengan Server',
+                icon: "error",
+              });
+        })
        
     }
 

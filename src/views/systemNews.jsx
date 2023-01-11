@@ -127,8 +127,12 @@ const Addnews = () => {
                     }
                 })
 
-            .then(() => {
-                alert('data dihapus')
+            .then((response) => {
+                swal({
+                    title: "Success!",
+                    text: response.data.message,
+                    icon: "success",
+                  });
                 loadData()
                 setValueEmpty()
             })
@@ -152,7 +156,11 @@ const Addnews = () => {
                     }
                 })
                 .then(function (response) {
-                    alert('data berhasil diupdate')
+                    swal({
+                        title: "Success!",
+                        text: response.data.message,
+                        icon: "success",
+                      });
                     loadData()
                     setValueEmpty()
                 })
@@ -162,7 +170,11 @@ const Addnews = () => {
         } else {
             if (judul == '' || kategori == '' || contentnews == '' || tags == '') {
 
-                alert('Gagal! Data Masih Ada yang Kosong')
+                swal({
+                    title: "Gagal!",
+                    text: 'Data Masih Ada yang Kosong',
+                    icon: "error",
+                  });
 
             } else {
                 const img = contentnews.slice(contentnews.indexOf(`src="`) + 5, contentnews.indexOf(`style="`) - 2)
@@ -181,7 +193,11 @@ const Addnews = () => {
                         }
                     })
                     .then(function (response) {
-                        alert('data berhasil ditambah')
+                        swal({
+                            title: "Success!",
+                            text: response.data.message,
+                            icon: "success",
+                          });
                         loadData()
                         setValueEmpty()
                     })
