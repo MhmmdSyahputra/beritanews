@@ -11,10 +11,40 @@ import { API_URL } from '../utils/constans'
 
 
 const Berita = () => {
-  const [berita, setBerita] = useState()
+  const [berita, setBerita] = useState([])
   const [kategori, setKategori] = useState('ALL')
   const [kategories, setKategories] = useState()
   const [loading, setLoading] = useState(true)
+
+
+  // PAGINATION ---------------------------------------------------
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentBerita = berita.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(berita.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(berita.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   // MENGAMBIL DATA YG ADA DI URL JIKA ADA -------------------------------------------------------
   const params = useParams();
@@ -22,7 +52,7 @@ const Berita = () => {
 
   useEffect(() => {
     document.title = "Berita"
-  },[]);
+  }, []);
 
   useEffect(() => {
     // JIKA DATA DI URL ADA MAKA SET KATEGORI MENJADI DATA URL ITU ---------------------------------
@@ -61,15 +91,15 @@ const Berita = () => {
           setBerita(news);
           setLoading(false)
         })
-        return
+      return
     }
     axios.
-        get(API_URL + `news/`)
-        .then((res) => {
-          const news = res.data;
-          setBerita(news);
-          setLoading(false)
-        })
+      get(API_URL + `news/`)
+      .then((res) => {
+        const news = res.data;
+        setBerita(news);
+        setLoading(false)
+      })
   }, [kategori])
 
   useEffect(() => {
@@ -154,12 +184,41 @@ const Berita = () => {
                 :
                 (
                   // MENCETAK CARDBERITA2 DENGAN MENGIRIMKAN DATA YG SUDAH DI FETCH DI ATAS
-                  <div className="row">
-                    {
-                      berita && berita.reverse().map((databerita, index) => (
-                        <CardBerita2 key={index} data={databerita} size='20px' content={parse(databerita.isiBerita.substring(databerita.isiBerita.indexOf(`style="`) + 40, 400))} />
-                      ))
-                    }
+                  <div>
+
+                    <div className="row">
+                      {
+                        currentBerita.reverse().map((databerita, index) => (
+                          <CardBerita2 key={index} data={databerita} size='20px' content={parse(databerita.isiBerita.substring(databerita.isiBerita.indexOf(`style="`) + 40, 400))} />
+                        ))
+                      }
+                    </div>
+                    <nav aria-label="Page navigation example ">
+                      <ul className="pagination justify-content-center">
+                        <li className="page-item">
+                          <a className="page-link" href="#" aria-label="Previous" onClick={handlePreviousPage}>
+                            <span aria-hidden="true">&laquo;</span>
+                            <span className="sr-only">Previous</span>
+                          </a>
+                        </li>
+                        {pageNumbers.map(number => (
+                          <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
+                            <a className="page-link" href="#" onClick={() => handlePageChange(number)}>
+                              {number}
+                            </a>
+                          </li>
+                        ))}
+                        <li className="page-item">
+                          <a className="page-link" href="#" aria-label="Next" onClick={handleNextPage}>
+                            <span aria-hidden="true">&raquo;</span>
+                            <span className="sr-only">Next</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+
+
+
                   </div>
                 )
             }
