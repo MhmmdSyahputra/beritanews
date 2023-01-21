@@ -9,6 +9,7 @@ export const SignUp = () => {
     const [lastname, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [koderahasia, setKodeRahasia] = useState('')
 
     useEffect(() => {
         document.title = "SignUp"
@@ -16,6 +17,15 @@ export const SignUp = () => {
 
     const Signup = (e) => {
         e.preventDefault();
+
+        if (koderahasia !== 'billyganteng' || koderahasia === '') {
+            swal({
+                title: "Error!",
+                text: 'Kode Rahasia Salah!',
+                icon: "error",
+              });
+            return
+        }
 
         if (firstname == '' || lastname == '' || email == '' || password == '') {
             swal({
@@ -110,6 +120,14 @@ export const SignUp = () => {
                                     <div className="form-floating mb-4">
                                         <input type="password" className="form-control input-login bg-light" id="password" placeholder="Password" value={password} onChange={e=>setPassword(e.target.value)} />
                                         <label htmlFor="password">Password</label>
+                                    </div>
+
+                                    <div>
+                                        <h6>Kode Rahasia</h6>
+                                    </div>
+                                    <div className="form-floating mb-4">
+                                        <input type="password" className="form-control input-login bg-light" id="password" placeholder="Password" value={koderahasia} onChange={e=>setKodeRahasia(e.target.value)} />
+                                        <label htmlFor="password">Secret </label>
                                     </div>
 
                                     <button className='btn text-light mb-3' type='submit' style={{ backgroundColor: '#094584', width: '100%', height: '45px', borderRadius: '30px' }}>Sign Up</button>
