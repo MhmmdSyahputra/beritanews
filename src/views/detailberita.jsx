@@ -53,7 +53,7 @@ const Detailberita = () => {
     e.preventDefault()
     axios.
       post(API_URL + `news/${id}/komentar`, {
-        nama: namaakun,
+        nama: namaakun == '' ? 'Nome' : namaakun ,
         isiKomentar: comentar,
       })
     
@@ -111,8 +111,11 @@ const Detailberita = () => {
                     <span className='mx-3'>{data.kategori}</span> • 
                     <span className='mx-3'>{getDayNews(data.tglCreate.slice(0, 10))}</span> |
                     <span className='mx-3'>{data.tglCreate.slice(0, 10)} - {data.tglCreate.slice(10, 15)}</span> 
+                    <span className='mx-3'><i className="fa-solid fa-eye"></i> {data.tayang}x Dilihat</span>
                     <br />
-                    <i className="fa-solid fa-eye"></i> {data.tayang}x Dilihat
+                  </div>
+                  <div className="kategori mb-4 text-muted">
+                    Kreator : {data.penulis}
                   </div>
 
                   <div className="content">
