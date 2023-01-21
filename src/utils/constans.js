@@ -1,4 +1,6 @@
-export const API_URL = "http://localhost:3003/";
+// LOCAL --------------------------
+// export const API_URL = "http://localhost:3003/";
 
-// ngrok
-// export const API_URL = "https://3827-114-122-40-135.ap.ngrok.io/";
+//DEPLOY -----------------------
+export const API_URL = "https://beritanews-be-production-490e.up.railway.app/";
+
