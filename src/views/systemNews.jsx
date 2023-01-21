@@ -184,6 +184,7 @@ const Addnews = () => {
                         kategori: kategori,
                         gambarberita: img,
                         isiBerita: contentnews,
+                        penulis: username,
                         tag: tags,
                     },
                     {

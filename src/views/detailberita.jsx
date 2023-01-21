@@ -23,7 +23,7 @@ const Detailberita = () => {
 
   const getDayNews = (data) => {
     const dateString = data
-    const [year, month, day] = dateString.split("-");
+    const [day, month, year] = dateString.split("/");
     const date = new Date(year, month - 1, day);
     const dayOfWeek = date.getDay();
 
@@ -108,10 +108,9 @@ const Detailberita = () => {
                   </div>
 
                   <div className="kategori mb-4 text-muted">
-                    {
-
-                    }
-                    {data.kategori} | {getDayNews(data.tglCreate.slice(0, 10))} | {data.tglCreate.slice(0, 10)} | {data.tglCreate.slice(12, 19)}
+                    <span className='mx-3'>{data.kategori}</span> • 
+                    <span className='mx-3'>{getDayNews(data.tglCreate.slice(0, 10))}</span> |
+                    <span className='mx-3'>{data.tglCreate.slice(0, 10)} - {data.tglCreate.slice(10, 15)}</span> 
                     <br />
                     <i className="fa-solid fa-eye"></i> {data.tayang}x Dilihat
                   </div>
